@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="4dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <!--            app:imageUrl="@{movie.posterPath}"-->
+            <ImageView
+                    android:id="@+id/poster_image_newest_movies"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:minHeight="150dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:contentDescription="@string/image_description"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+            <!--                android:textSize="@dimen/page_title_size"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/poster_image_newest_movies"-->
+
+            <TextView
+                    android:id="@+id/title_newest_movies"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:maxLines="3"
+                    android:ellipsize="end"
+                    android:text=""
+                    android:textAlignment="textStart"
+                    android:textSize="@dimen/page_title_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/poster_image_newest_movies"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/release_date_newest_movies"
+                    android:text="RELEASE DATE"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp"
+                    android:textSize="@dimen/input_text_size"
+                    app:layout_constraintTop_toBottomOf="@id/title_newest_movies"
+                    app:layout_constraintStart_toEndOf="@id/poster_image_newest_movies" />
+
+                    <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:id="@+id/linear_layout"
+                            app:layout_constraintTop_toBottomOf="@id/release_date_newest_movies"
+                            app:layout_constraintStart_toEndOf="@id/poster_image_newest_movies">
+
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp"
+                                android:src="@drawable/ic_star_golden_24dp"
+                                android:contentDescription="@string/image_description" />
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/vote_newest_movies"
+                                android:text=""
+                                android:layout_marginTop="9dp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_marginStart="4dp"
+                                android:layout_marginEnd="4dp"/>
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/slash"
+                                android:layout_marginTop="9dp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_marginStart="4dp"
+                                android:layout_marginEnd="4dp" />
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/vote_count_newest_movies"
+                                android:text=""
+                                android:layout_marginTop="9dp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_marginStart="4dp"
+                                android:layout_marginEnd="4dp" />
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/popularity"
+                                android:text="@string/popularity_colon"
+                                android:textSize="10sp"
+                                android:padding="2dp"
+                                android:layout_marginTop="9dp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_marginStart="4dp"
+                                android:layout_marginEnd="4dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/popularity_newest_movies"
+                            android:text="50"
+                            android:textSize="10sp"
+                            android:textColor="@color/design_default_color_on_secondary"
+                            android:background="@color/colorGolden" android:padding="2dp"
+                            android:layout_marginTop="9dp"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginEnd="4dp" />
+                    </LinearLayout>
+
+                <ImageButton
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/heart_button_newest_movies"
+                        android:src="@drawable/ic_favorite_border_primary_24dp"
+                        android:background="?android:attr/selectableItemBackground"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>
