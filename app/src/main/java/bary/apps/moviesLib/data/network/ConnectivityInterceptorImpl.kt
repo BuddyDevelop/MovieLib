@@ -2,6 +2,8 @@ package bary.apps.moviesLib.data.network
 
 import android.content.Context
 import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import bary.apps.moviesLib.internal.NoConnectivityException
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -20,9 +22,15 @@ class ConnectivityInterceptorImpl(
 
     private fun isOnline() : Boolean {
         val connectivityManager = appContext.getSystemService(Context.CONNECTIVITY_SERVICE)
-        as ConnectivityManager
+                as ConnectivityManager
 
-        val networkInfo = connectivityManager.activeNetworkInfo
-        return networkInfo != null && networkInfo.isConnected
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val network = connectivityManager.activeNetwork
+            val capabilities = connectivityManager.getNetworkCapabilities(network)
+            capabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) ?: false
+        } else {
+            val activeNetwork = connectivityManager.getActiveNetworkInfo() // Deprecated in 29
+            activeNetwork != null && activeNetwork.isConnectedOrConnecting // // Deprecated in 28
+        }
     }
 }

@@ -1,22 +1,19 @@
-package bary.apps.moviesLib.ui.movies.newest
+package bary.apps.moviesLib.ui.movies
 
-import android.content.Context
 import android.content.res.Resources
-import android.util.Log
-import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat.getColor
 import bary.apps.moviesLib.R
 import bary.apps.moviesLib.data.BASE_POSTER_PATH
 import bary.apps.moviesLib.data.database.entity.Movie
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.item_newest_movies.*
-import kotlinx.android.synthetic.main.item_newest_movies.view.*
+import kotlinx.android.synthetic.main.item_movie.*
 
 const val POPULARITY_HIGH = 80
 const val POPULARITY_LOW = 40
 
-class NewestMoviesItem(
+class MovieItem(
     val movieItem: Movie
 ) : Item() {
     override fun bind(viewHolder: ViewHolder, position: Int) {
@@ -34,7 +31,7 @@ class NewestMoviesItem(
         }
     }
 
-    override fun getLayout() = R.layout.item_newest_movies
+    override fun getLayout() = R.layout.item_movie
 
     private fun ViewHolder.loadMovieImage(){
         Glide.with(this.containerView)
@@ -45,11 +42,12 @@ class NewestMoviesItem(
 
     private fun ViewHolder.changePopularityBgColor(){
         if(movieItem.popularity > POPULARITY_HIGH)
-            popularity_newest_movies.setBackgroundColor(Resources.getSystem().getColor(android.R.color.holo_green_dark))
+//            popularity_newest_movies.setBackgroundColor(Resources.getSystem().getColor(android.R.color.holo_green_dark))
+            popularity_newest_movies.setBackgroundColor(getColor(Resources.getSystem(), android.R.color.holo_green_dark, null))
         else if(movieItem.popularity < POPULARITY_LOW)
-            popularity_newest_movies.setBackgroundColor(Resources.getSystem().getColor(android.R.color.holo_red_light))
+            popularity_newest_movies.setBackgroundColor(getColor(Resources.getSystem(),android.R.color.holo_red_light, null))
         else
-            popularity_newest_movies.setBackgroundColor(Resources.getSystem().getColor(android.R.color.holo_orange_light))
+            popularity_newest_movies.setBackgroundColor(getColor(Resources.getSystem(),android.R.color.holo_orange_light, null))
     }
 
     private fun ViewHolder.heartButtonClick(){

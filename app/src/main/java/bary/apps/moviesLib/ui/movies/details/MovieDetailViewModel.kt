@@ -1,28 +1,19 @@
 package bary.apps.moviesLib.ui.movies.details
 
-import android.widget.ImageView
-import androidx.databinding.BindingAdapter
 import androidx.lifecycle.ViewModel
-import bary.apps.moviesLib.data.BASE_POSTER_PATH
 import bary.apps.moviesLib.data.repository.MoviesRepository
 import bary.apps.moviesLib.internal.lazyDeferred
-import com.bumptech.glide.Glide
 
 class MovieDetailViewModel(
-    private val moviesRepository: MoviesRepository
+    private val moviesRepository: MoviesRepository,
+    private val movieId: String
 ) : ViewModel() {
 
-    val movies by lazyDeferred {
-        moviesRepository.getMovie()
+    val movie by lazyDeferred {
+        moviesRepository.getMovie(movieId)
     }
 
-    companion object {
-        @JvmStatic
-        @BindingAdapter("imageUrl")
-        fun loadImage(view: ImageView, url: String?) {
-            if (!url.isNullOrEmpty())
-                Glide.with(view.context).load(BASE_POSTER_PATH + url).into(view)
-
-        }
+    val movieVideos by lazyDeferred {
+        moviesRepository.getMovieTrailers(movieId)
     }
 }

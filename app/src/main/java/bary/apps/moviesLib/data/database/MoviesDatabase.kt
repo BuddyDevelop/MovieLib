@@ -8,7 +8,8 @@ import bary.apps.moviesLib.data.database.entity.MovieDetails
 
 @Database(
     entities = [MovieDetails::class],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 abstract class MoviesDatabase : RoomDatabase(){
     abstract fun movieDao(): MovieDao

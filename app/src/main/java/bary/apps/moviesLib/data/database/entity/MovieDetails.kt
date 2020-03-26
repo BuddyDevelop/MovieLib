@@ -1,9 +1,7 @@
 package bary.apps.moviesLib.data.database.entity
 
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "movies")
@@ -18,7 +16,6 @@ data class MovieDetails(
     val backdropPath: String, // /https://image.tmdb.org/t/p/w780.jpg
     @ColumnInfo(name="budget")
     val budget: Double, // 0
-//    val genres: List<Genre>,
     @ColumnInfo(name="homepage")
     val homepage: String,
     @ColumnInfo(name="imdb_id")
@@ -37,10 +34,6 @@ data class MovieDetails(
     @ColumnInfo(name="poster_path")
     @SerializedName("poster_path")
     val posterPath: String, // /6rsLfXqlZSXa6zLfbofHVhXs8Yr.jpg
-//    @SerializedName("production_companies")
-//    val productionCompanies: List<ProductionCompany>,
-//    @SerializedName("production_countries")
-//    val productionCountries: List<ProductionCountry>,
     @ColumnInfo(name="release_date")
     @SerializedName("release_date")
     val releaseDate: String, // 2023-02-16

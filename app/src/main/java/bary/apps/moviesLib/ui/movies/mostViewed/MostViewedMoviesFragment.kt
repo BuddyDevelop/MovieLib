@@ -1,6 +1,6 @@
 package bary.apps.moviesLib.ui.movies.mostViewed
 
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -24,7 +24,7 @@ class MostViewedMoviesFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MostViewedMoviesViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(MostViewedMoviesViewModel::class.java)
         // TODO: Use the ViewModel
 
     }

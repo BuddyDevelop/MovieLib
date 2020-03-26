@@ -1,6 +1,6 @@
 package bary.apps.moviesLib.ui.movies.topRated
 
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -25,7 +25,7 @@ class TopRatedMoviesFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(TopRatedMoviesViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(TopRatedMoviesViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

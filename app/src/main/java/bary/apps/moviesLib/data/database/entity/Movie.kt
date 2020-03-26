@@ -27,6 +27,6 @@ data class Movie(
     val overview: String, // Decades after Sarah Connor prevented Judgment Day, a lethal new Terminator is sent to eliminate the future leader of the resistance. In a fight to save mankind, battle-hardened Sarah Connor teams up with an unexpected ally and an enhanced super soldier to stop the deadliest Terminator yet.
     @SerializedName("release_date")
     val releaseDate: String, // 2019-10-23
-    val favourite: Boolean?, //local db check if user likes movie
-    val watchlist: Boolean? //local db check if user would like to watch it
+    var isFavourite: Boolean? = false, //local db check if user likes movie
+    var isWatchlist: Boolean? = false//local db check if user would like to watch it
 )

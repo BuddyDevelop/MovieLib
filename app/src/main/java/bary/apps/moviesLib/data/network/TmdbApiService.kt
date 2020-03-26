@@ -3,6 +3,7 @@ package bary.apps.moviesLib.data.network
 import bary.apps.moviesLib.data.API_KEY
 import bary.apps.moviesLib.data.database.entity.MovieDetails
 import bary.apps.moviesLib.data.network.response.MoviesResponse
+import bary.apps.moviesLib.data.network.response.Videos
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
@@ -21,6 +22,11 @@ interface TmdbApiService {
         @Path("movieId") movieId: String
     ): Deferred<MovieDetails>
 
+    @GET("/3/movie/{movieId}/videos")
+    fun getMovieVideos(
+        @Path("movieId") movieId: String
+    ): Deferred<Videos>
+
     @GET("/3/discover/movie?")
     fun getMoviesByVoteCountAndSortByRelaseDate(
         @Query("vote_count.gte") voteCount: String,
@@ -37,13 +43,13 @@ interface TmdbApiService {
                     .url()
                     .newBuilder()
                     .addQueryParameter("api_key", API_KEY)
-//                    .addQueryParameter("append_to_response", "videos")
                     .build()
 
                 val request = chain.request()
                     .newBuilder()
                     .url(url)
                     .build()
+//                Log.e("URL::", url.toString())
 
                 return@Interceptor chain.proceed(request)
             }

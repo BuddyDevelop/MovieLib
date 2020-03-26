@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import bary.apps.moviesLib.R
 import bary.apps.moviesLib.databinding.ActivityMainBinding
-import bary.apps.moviesLib.ui.movies.details.MovieDetailFragment
 import bary.apps.moviesLib.ui.movies.mostViewed.MostViewedMoviesFragment
 import bary.apps.moviesLib.ui.movies.newest.NewestMoviesFragment
 import bary.apps.moviesLib.ui.movies.topRated.TopRatedMoviesFragment
@@ -26,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         adapter.addFragment(NewestMoviesFragment(), resources.getString(R.string.newest_movies))
         adapter.addFragment(MostViewedMoviesFragment(), resources.getString(R.string.most_viewed_movies))
         adapter.addFragment(TopRatedMoviesFragment(), resources.getString(R.string.top_rated_movies))
-        adapter.addFragment(MovieDetailFragment(), resources.getString(R.string.details_movie))
+//        adapter.addFragment(MovieDetailFragment(), resources.getString(R.string.details_movie))
         view_pager.adapter = adapter
         tab_layout.setupWithViewPager(view_pager)
     }
