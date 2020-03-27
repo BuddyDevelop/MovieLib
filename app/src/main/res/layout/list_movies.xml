@@ -4,36 +4,24 @@
         xmlns:tools="http://schemas.android.com/tools"
         tools:viewBindingIgnore="true">
 
-        <androidx.constraintlayout.widget.Group
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+        <com.facebook.shimmer.ShimmerFrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:id="@+id/group_loading"
-                android:layout_marginEnd="8dp"
-                app:constraint_referenced_ids="progress_bar_newest_movies, loading_text_newest_movies"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:duration="700">
 
-        <ProgressBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/progress_bar_newest_movies"
-                android:indeterminate="true"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/loading_text_newest_movies"
-                android:text="@string/loading"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/progress_bar_newest_movies"
-                app:layout_constraintVertical_bias="0.0"/>
+                        <include layout="@layout/item_placeholder_movie"/>
+                        <include layout="@layout/item_placeholder_movie"/>
+                        <include layout="@layout/item_placeholder_movie"/>
+                        <include layout="@layout/item_placeholder_movie"/>
+                </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
         <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"

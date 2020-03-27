@@ -9,4 +9,8 @@
     <dimen name="input_text_size">16sp</dimen>
     <dimen name="page_title_size">20sp</dimen>
     <dimen name="text_large_size">25sp</dimen>
+    <dimen name="placeholder_text_height">24dp</dimen>
+    <dimen name="placeholder_text_long_width">100dp</dimen>
+    <dimen name="placeholder_text_medium_width">50dp</dimen>
+    <dimen name="placeholder_text_small_width">20dp</dimen>
 </resources>

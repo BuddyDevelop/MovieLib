@@ -6,27 +6,30 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import bary.apps.moviesLib.R
+import bary.apps.moviesLib.databinding.MostViewedMoviesFragmentBinding
+import kotlinx.android.synthetic.main.list_movies.*
 
 
 class MostViewedMoviesFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = MostViewedMoviesFragment()
-    }
-
     private lateinit var viewModel: MostViewedMoviesViewModel
+    private lateinit var binding: MostViewedMoviesFragmentBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.most_viewed_movies_fragment, container, false)
+        binding = DataBindingUtil.inflate(layoutInflater, R.layout.most_viewed_movies_fragment, container, false)
+        return binding.root
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(MostViewedMoviesViewModel::class.java)
-        // TODO: Use the ViewModel
 
+
+        group_loading.startShimmerAnimation()
     }
 
 }

@@ -18,7 +18,7 @@ import retrofit2.http.Query
 interface TmdbApiService {
 
     @GET("/3/movie/{movieId}")
-    fun getMovieById(
+    fun getMovieDetailsById(
         @Path("movieId") movieId: String
     ): Deferred<MovieDetails>
 

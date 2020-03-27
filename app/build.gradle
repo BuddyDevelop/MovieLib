@@ -60,13 +60,6 @@ dependencies {
 //    @Gson
     implementation "com.google.code.gson:gson:2.8.5"
 
-//Navigation
-    implementation "androidx.navigation:navigation-fragment:$nav_version"
-    implementation "androidx.navigation:navigation-ui:$nav_version"
-    // Kotlin
-    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
-    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
-
 //Room
     implementation "androidx.room:room-runtime:$room_version"
     // optional - Kotlin Extensions and Coroutines support for Room
@@ -111,4 +104,7 @@ dependencies {
 
 //youtube player
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.5'
+
+// Facebook shimmer effect dependency
+    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
 }

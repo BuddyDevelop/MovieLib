@@ -17,7 +17,7 @@ class MovieDetailsNetworkDataSourceImpl(
     override suspend fun fetchMovieById(movieId: String) {
         try {
             val fetchMovieDetails = tmdbApiService
-                .getMovieById(movieId)
+                .getMovieDetailsById(movieId)
                 .await()
             _downloadedMovieDetails.postValue(fetchMovieDetails)
         }

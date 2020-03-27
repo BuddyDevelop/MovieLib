@@ -42,8 +42,8 @@ class NewestMoviesFragment : ScopedFragment(), KodeinAware {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory).get(NewestMoviesViewModel::class.java)
 
+        group_loading.startShimmerAnimation()
         bindUI()
-
     }
 
     private fun bindUI() = launch{
@@ -51,6 +51,7 @@ class NewestMoviesFragment : ScopedFragment(), KodeinAware {
         movies.observe(viewLifecycleOwner, Observer {
             if(it == null) return@Observer
 
+            group_loading.stopShimmerAnimation()
             group_loading.visibility = View.GONE
             initRecyclerView(it.toMoviesEntries())
         })
