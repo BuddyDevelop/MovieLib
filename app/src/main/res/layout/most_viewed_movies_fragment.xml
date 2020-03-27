@@ -5,12 +5,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/most_viewed_movies_tv"
-                android:text="@string/most_viewed_movies" />
-
         <include layout="@layout/list_movies"
                 android:id="@+id/most_viewed_movies_fragment_content"/>
 
