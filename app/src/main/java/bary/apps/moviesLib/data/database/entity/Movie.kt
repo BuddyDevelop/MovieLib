@@ -1,10 +1,13 @@
 package bary.apps.moviesLib.data.database.entity
 
 
+import android.os.Parcelable
 import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
-
+@Parcelize
+@Entity(tableName = "movies")
 data class Movie(
     val id: Int, // 290859
     val popularity: Double, // 64.094
@@ -27,6 +30,7 @@ data class Movie(
     val overview: String, // Decades after Sarah Connor prevented Judgment Day, a lethal new Terminator is sent to eliminate the future leader of the resistance. In a fight to save mankind, battle-hardened Sarah Connor teams up with an unexpected ally and an enhanced super soldier to stop the deadliest Terminator yet.
     @SerializedName("release_date")
     val releaseDate: String, // 2019-10-23
-    var isFavourite: Boolean? = false, //local db check if user likes movie
-    var isWatchlist: Boolean? = false//local db check if user would like to watch it
-)
+    var isFavourite: Boolean?, //local db check if user likes movie
+    var isWatchlist: Boolean?,//local db check if user would like to watch it
+    var watchedCount: Boolean?
+) : Parcelable

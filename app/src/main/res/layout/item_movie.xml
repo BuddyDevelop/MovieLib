@@ -3,6 +3,10 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
+        <import type="bary.apps.moviesLib.data.ConstantsKt"/>
+        <variable
+                name="movie"
+                type="bary.apps.moviesLib.data.database.entity.Movie" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -25,6 +29,7 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
+                    imageUrl="@{ConstantsKt.BASE_POSTER_PATH + movie.posterPath}"
                     android:contentDescription="@string/image_description"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -42,7 +47,7 @@
                     android:layout_marginEnd="10dp"
                     android:maxLines="3"
                     android:ellipsize="end"
-                    android:text="@string/title"
+                    android:text="@{movie.title}"
                     android:textAlignment="textStart"
                     android:textSize="@dimen/page_title_size"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +58,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/release_date_newest_movies"
-                    android:text="@string/release_date"
+                    android:text="@{movie.releaseDate}"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
@@ -74,7 +79,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/vote_newest_movies"
-                                android:text="@string/vote_average"
+                                android:text="@{String.valueOf(movie.voteAverage)}"
                                 app:layout_constraintTop_toBottomOf="@id/release_date_newest_movies"
                                 app:layout_constraintStart_toEndOf="@id/item_movie_image"
                                 android:layout_marginTop="7dp"
@@ -97,7 +102,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/vote_count_newest_movies"
-                                android:text="@string/vote_count"
+                                android:text="@{String.valueOf(movie.voteCount)}"
                                 app:layout_constraintTop_toBottomOf="@id/release_date_newest_movies"
                                 app:layout_constraintStart_toEndOf="@id/vote_newest_movies"
                                 android:layout_marginTop="7dp"
@@ -123,12 +128,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/popularity_newest_movies"
-                            android:text="@string/random_number"
+                            android:text="@{String.valueOf(movie.popularity)}"
                             android:textSize="10sp"
                             app:layout_constraintTop_toBottomOf="@id/item_movie_image"
                             app:layout_constraintStart_toEndOf="@id/popularity"
                             android:textColor="@color/design_default_color_on_secondary"
-                            android:background="@color/colorGolden"
+                            android:background="@{movie.popularity &lt; 40 ? @color/colorRed : (movie.popularity &lt; 80 ? @color/colorOrange : @color/colorGreen )}"
                             android:padding="2dp"
                             android:layout_marginTop="4dp"
                             android:layout_marginBottom="8dp"

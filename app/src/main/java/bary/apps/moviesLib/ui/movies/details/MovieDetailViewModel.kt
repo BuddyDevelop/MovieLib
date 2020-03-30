@@ -1,6 +1,9 @@
 package bary.apps.moviesLib.ui.movies.details
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import bary.apps.moviesLib.data.database.entity.Movie
 import bary.apps.moviesLib.data.repository.MoviesRepository
 import bary.apps.moviesLib.internal.lazyDeferred
 
@@ -9,8 +12,12 @@ class MovieDetailViewModel(
     private val movieId: String
 ) : ViewModel() {
 
-    val movie by lazyDeferred {
-        moviesRepository.getMovie(movieId)
+    private val movie = MutableLiveData<Movie>();
+
+    val getForwardedMovie  = movie
+
+    fun setForwardedMovie(forwardedMovie: Movie){
+        movie.value = forwardedMovie
     }
 
     val movieVideos by lazyDeferred {

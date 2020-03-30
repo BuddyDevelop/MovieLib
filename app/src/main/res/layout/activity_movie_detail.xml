@@ -8,7 +8,7 @@
         <import type="bary.apps.moviesLib.R" />
         <variable
                 name="movie"
-                type="bary.apps.moviesLib.data.database.entity.MovieDetails" />
+                type="bary.apps.moviesLib.data.database.entity.Movie" />
     </data>
 
     <ScrollView
@@ -113,16 +113,16 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/movie_title" />
 
-            <TextView
-                    android:id="@+id/movie_status"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:paddingTop="8dp"
-                    android:text="@{movie.status}"
-                    android:textSize="@dimen/input_text_size"
-                    app:layout_constraintStart_toEndOf="@id/poster"
-                    app:layout_constraintTop_toBottomOf="@id/movie_title" />
+<!--            <TextView-->
+<!--                    android:id="@+id/movie_status"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="8dp"-->
+<!--                    android:paddingTop="8dp"-->
+<!--                    android:text="@{movie.originalLanguage}"-->
+<!--                    android:textSize="@dimen/input_text_size"-->
+<!--                    app:layout_constraintStart_toEndOf="@id/poster"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/movie_title" />-->
 
             <TextView
                     android:id="@+id/release_date"
@@ -132,7 +132,7 @@
                     android:paddingTop="8dp"
                     android:text="@{movie.releaseDate}"
                     android:textSize="@dimen/input_text_size"
-                    app:layout_constraintStart_toEndOf="@id/movie_status"
+                    app:layout_constraintStart_toEndOf="@id/poster"
                     app:layout_constraintTop_toBottomOf="@id/movie_title" />
 
             <ImageView
@@ -145,7 +145,7 @@
                     android:contentDescription="@string/image_description"
                     android:src="@drawable/ic_star_golden_24dp"
                     app:layout_constraintStart_toEndOf="@id/poster"
-                    app:layout_constraintTop_toBottomOf="@id/movie_status" />
+                    app:layout_constraintTop_toBottomOf="@id/release_date" />
 
             <TextView
                     android:id="@+id/vote_avg"
@@ -157,7 +157,7 @@
                     android:text="@{String.valueOf(movie.voteAverage)}"
                     android:textSize="@dimen/input_text_size"
                     app:layout_constraintStart_toEndOf="@id/star"
-                    app:layout_constraintTop_toBottomOf="@id/movie_status" />
+                    app:layout_constraintTop_toBottomOf="@id/release_date" />
 
             <TextView
                     android:id="@+id/slash"
@@ -169,7 +169,7 @@
                     android:text="@string/slash"
                     android:textSize="@dimen/input_text_size"
                     app:layout_constraintStart_toEndOf="@id/vote_avg"
-                    app:layout_constraintTop_toBottomOf="@id/movie_status" />
+                    app:layout_constraintTop_toBottomOf="@id/release_date" />
 
             <TextView
                     android:id="@+id/vote_count"
@@ -181,7 +181,7 @@
                     android:text="@{String.valueOf(movie.voteCount)}"
                     android:textSize="@dimen/input_text_size"
                     app:layout_constraintStart_toEndOf="@id/slash"
-                    app:layout_constraintTop_toBottomOf="@id/movie_status" />
+                    app:layout_constraintTop_toBottomOf="@id/release_date" />
 
             <TextView
                     android:id="@+id/popularity_movie_details"

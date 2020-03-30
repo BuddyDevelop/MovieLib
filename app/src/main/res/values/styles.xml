@@ -5,6 +5,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="Theme.MaterialComponents.DayNight">
@@ -19,4 +20,16 @@
         <item name="android:textColorSecondary">#EEEEEE</item>
     </style>
 
+<!--    change toolbar colors in dark theme-->
+    <style name="DarkThemeApp" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="android:actionBarStyle">@style/MyActionBarStyle</item>
+    </style>
+
+    <style name="MyActionBarStyle" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="android:titleTextStyle">@style/MyActionBarTitleTextStyle</item>
+    </style>
+
+    <style name="MyActionBarTitleTextStyle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/colorGolden</item>
+    </style>
 </resources>

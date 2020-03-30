@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import bary.apps.moviesLib.R
+import bary.apps.moviesLib.data.database.entity.Movie
 import bary.apps.moviesLib.data.network.response.MoviesResponse
 import bary.apps.moviesLib.databinding.NewestMoviesFragmentBinding
 import bary.apps.moviesLib.ui.base.ScopedFragment
@@ -27,7 +28,6 @@ import org.kodein.di.generic.instance
 class NewestMoviesFragment : ScopedFragment(), KodeinAware {
     override val kodein by closestKodein()
     private val viewModelFactory: NewestMoviesViewModelFactory by instance()
-
 
     private lateinit var viewModel: NewestMoviesViewModel
     private lateinit var binding: NewestMoviesFragmentBinding
@@ -76,15 +76,19 @@ class NewestMoviesFragment : ScopedFragment(), KodeinAware {
         groupAdapter.setOnItemClickListener { item, _ ->
             //to be sure click was on movie item
             (item as? MovieItem)?.let {
-                showMovieDetails(it.movieItem.id.toString())
+                showMovieDetails(it.movieItem.id.toString(), it.movieItem)
             }
         }
     }
 
-    private fun showMovieDetails(movieId: String){
+    private fun showMovieDetails(
+        movieId: String,
+        movie: Movie
+    ){
         activity?.let { activity ->
             val intent = Intent(requireActivity(), MovieDetailActivity::class.java)
             intent.putExtra("MovieId", movieId)
+            intent.putExtra("Movie", movie)
             activity.startActivity(intent)
         }
     }
