@@ -33,4 +33,5 @@
     <string name="add_to_watchlist">Add to Watchlist</string>
     <string name="add_to_favourite">Add to Favourite</string>
     <string name="added_to_favourite">Movie %s has been added to favourites!</string>
+    <string name="added_to_watchlist">Movie %s has been added to watchlist!</string>
 </resources>

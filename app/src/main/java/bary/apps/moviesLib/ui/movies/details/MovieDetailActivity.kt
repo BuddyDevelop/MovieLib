@@ -1,7 +1,6 @@
 package bary.apps.moviesLib.ui.movies.details
 
 import android.os.Bundle
-import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -36,21 +35,14 @@ class MovieDetailActivity : ScopedActivity(), KodeinAware {
             .get(MovieDetailViewModel::class.java)
 
         val movie: Movie = intent.getParcelableExtra("Movie") ?: throw MovieNotFoundException()
-        viewModel.setForwardedMovie(movie)
+
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
+        binding.movie = movie
 
         lifecycle.addObserver(video)
 
-        loadMovieDetails()
         loadTrailer()
-    }
-
-    private fun loadMovieDetails() = launch{
-        viewModel.forwardedMovie.observe(this@MovieDetailActivity, Observer {
-            if(it == null) return@Observer
-
-            group_loading.visibility = View.GONE
-            binding.movie = it
-        })
     }
 
     private fun loadTrailer() = launch {

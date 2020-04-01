@@ -1,25 +1,18 @@
 package bary.apps.moviesLib.ui.movies.details
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import bary.apps.moviesLib.data.database.entity.Movie
 import bary.apps.moviesLib.data.repository.MoviesRepository
 import bary.apps.moviesLib.internal.lazyDeferred
+import bary.apps.moviesLib.ui.FavouriteClickListener
+import bary.apps.moviesLib.ui.WatchlistClickListener
 
 class MovieDetailViewModel(
-    private val moviesRepository: MoviesRepository,
+    override val moviesRepository: MoviesRepository,
     private val movieId: String
-) : ViewModel() {
-
-    private val movie = MutableLiveData<Movie>()
-
-    val forwardedMovie = movie
-
-    fun setForwardedMovie(forwardedMovie: Movie){
-        movie.value = forwardedMovie
-    }
+) : ViewModel(), FavouriteClickListener, WatchlistClickListener {
 
     val movieVideos by lazyDeferred {
         moviesRepository.getMovieTrailers(movieId)
     }
+
 }

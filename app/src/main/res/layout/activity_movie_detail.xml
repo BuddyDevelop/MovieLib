@@ -9,6 +9,9 @@
         <variable
                 name="movie"
                 type="bary.apps.moviesLib.data.database.entity.Movie" />
+        <variable
+                name="viewModel"
+                type="bary.apps.moviesLib.ui.movies.details.MovieDetailViewModel" />
     </data>
 
     <ScrollView
@@ -29,37 +32,6 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     app:layout_constraintGuide_percent="0.5" />
-
-            <androidx.constraintlayout.widget.Group
-                    android:id="@+id/group_loading"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    app:constraint_referenced_ids="progress_bar_movie_detail, loading_text_movie_detail"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            <ProgressBar
-                    android:id="@+id/progress_bar_movie_detail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:indeterminate="true"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                    android:id="@+id/loading_text_movie_detail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/loading"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/progress_bar_movie_detail"
-                    app:layout_constraintVertical_bias="0.0" />
 
             <androidx.constraintlayout.widget.Barrier
                     android:id="@+id/barrier"
@@ -113,16 +85,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/movie_title" />
 
-<!--            <TextView-->
-<!--                    android:id="@+id/movie_status"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_margin="8dp"-->
-<!--                    android:paddingTop="8dp"-->
-<!--                    android:text="@{movie.originalLanguage}"-->
-<!--                    android:textSize="@dimen/input_text_size"-->
-<!--                    app:layout_constraintStart_toEndOf="@id/poster"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/movie_title" />-->
 
             <TextView
                     android:id="@+id/release_date"
@@ -230,6 +192,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:backgroundTint="@color/colorPrimary"
+                    android:onClick="@{(view) -> viewModel.watchlistBtnClick(view, movie)}"
                     android:text="@string/add_to_watchlist"
                     android:textColor="@android:color/white"
                     app:icon="@drawable/ic_add_white_24dp"
@@ -246,6 +209,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:backgroundTint="@color/colorPrimary"
+                    android:onClick="@{(view) -> viewModel.favouriteBtnClick(view, movie)}"
                     android:text="@string/add_to_favourite"
                     android:textColor="@android:color/white"
                     app:icon="@drawable/ic_favorite_border_primary_24dp"
