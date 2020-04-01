@@ -45,7 +45,7 @@ class MovieDetailActivity : ScopedActivity(), KodeinAware {
     }
 
     private fun loadMovieDetails() = launch{
-        viewModel.getForwardedMovie.observe(this@MovieDetailActivity, Observer {
+        viewModel.forwardedMovie.observe(this@MovieDetailActivity, Observer {
             if(it == null) return@Observer
 
             group_loading.visibility = View.GONE

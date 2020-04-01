@@ -19,6 +19,7 @@ class MovieDetailsNetworkDataSourceImpl(
             val fetchMovieDetails = tmdbApiService
                 .getMovieDetailsById(movieId)
                 .await()
+
             _downloadedMovieDetails.postValue(fetchMovieDetails)
         }
         catch (e: NoConnectivityException){

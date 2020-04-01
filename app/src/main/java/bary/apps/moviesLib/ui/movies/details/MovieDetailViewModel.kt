@@ -1,6 +1,5 @@
 package bary.apps.moviesLib.ui.movies.details
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import bary.apps.moviesLib.data.database.entity.Movie
@@ -12,9 +11,9 @@ class MovieDetailViewModel(
     private val movieId: String
 ) : ViewModel() {
 
-    private val movie = MutableLiveData<Movie>();
+    private val movie = MutableLiveData<Movie>()
 
-    val getForwardedMovie  = movie
+    val forwardedMovie = movie
 
     fun setForwardedMovie(forwardedMovie: Movie){
         movie.value = forwardedMovie

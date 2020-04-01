@@ -27,6 +27,12 @@ interface TmdbApiService {
         @Path("movieId") movieId: String
     ): Deferred<Videos>
 
+    @GET("/3/movie/popular")
+    fun getPopularMovies() : Deferred<MoviesResponse>
+
+    @GET("/3/movie/top_rated")
+    fun getTopRatedMovies() : Deferred<MoviesResponse>
+
     @GET("/3/discover/movie?")
     fun getMoviesByVoteCountAndSortByRelaseDate(
         @Query("vote_count.gte") voteCount: String,
@@ -49,7 +55,6 @@ interface TmdbApiService {
                     .newBuilder()
                     .url(url)
                     .build()
-//                Log.e("URL::", url.toString())
 
                 return@Interceptor chain.proceed(request)
             }

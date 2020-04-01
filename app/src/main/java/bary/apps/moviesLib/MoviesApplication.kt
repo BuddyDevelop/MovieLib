@@ -7,12 +7,16 @@ import bary.apps.moviesLib.data.network.movieDetails.MovieDetailsNetworkDataSour
 import bary.apps.moviesLib.data.network.movieDetails.MovieDetailsNetworkDataSourceImpl
 import bary.apps.moviesLib.data.network.newestMovies.NewestMoviesNetworkDataSource
 import bary.apps.moviesLib.data.network.newestMovies.NewestMoviesNetworkDataSourceImpl
+import bary.apps.moviesLib.data.network.popularMovies.PopularMoviesNetworkDataSource
+import bary.apps.moviesLib.data.network.popularMovies.PopularMoviesNetworkDataSourceImpl
+import bary.apps.moviesLib.data.network.topRatedMovies.TopRatedMoviesNetworkDataSource
+import bary.apps.moviesLib.data.network.topRatedMovies.TopRatedMoviesNetworkDataSourceImpl
 import bary.apps.moviesLib.data.network.trailers.TrailerNetworkDataSource
 import bary.apps.moviesLib.data.network.trailers.TrailerNetworkDataSourceImpl
 import bary.apps.moviesLib.data.repository.MoviesRepository
 import bary.apps.moviesLib.data.repository.MoviesRepositoryImpl
 import bary.apps.moviesLib.ui.movies.details.MovieDetailViewModelFactory
-import bary.apps.moviesLib.ui.movies.newest.NewestMoviesViewModelFactory
+import bary.apps.moviesLib.ui.movies.BaseMoviesViewModelFactory
 import com.jakewharton.threetenabp.AndroidThreeTen
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -29,11 +33,12 @@ class MoviesApplication : Application(), KodeinAware {
         bind() from singleton { TmdbApiService(instance()) }
         bind<MovieDetailsNetworkDataSource>() with singleton { MovieDetailsNetworkDataSourceImpl(instance()) }
         bind<TrailerNetworkDataSource>() with singleton { TrailerNetworkDataSourceImpl(instance()) }
-        bind<MoviesRepository>() with  singleton { MoviesRepositoryImpl(instance(), instance(), instance(), instance()) }
-//        bind() from provider { MovieDetailViewModelFactory(instance()) }
+        bind<MoviesRepository>() with  singleton { MoviesRepositoryImpl(instance(), instance(), instance(), instance(), instance(), instance()) }
         bind() from factory { movieId: String -> MovieDetailViewModelFactory(instance(), movieId) }
-        bind() from provider { NewestMoviesViewModelFactory(instance()) }
+        bind() from provider { BaseMoviesViewModelFactory(instance()) }
         bind<NewestMoviesNetworkDataSource>() with singleton { NewestMoviesNetworkDataSourceImpl(instance()) }
+        bind<PopularMoviesNetworkDataSource>() with singleton { PopularMoviesNetworkDataSourceImpl(instance()) }
+        bind<TopRatedMoviesNetworkDataSource>() with singleton { TopRatedMoviesNetworkDataSourceImpl(instance()) }
     }
 
     override fun onCreate() {

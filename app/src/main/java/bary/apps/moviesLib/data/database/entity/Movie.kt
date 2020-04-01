@@ -3,12 +3,14 @@ package bary.apps.moviesLib.data.database.entity
 
 import android.os.Parcelable
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 @Entity(tableName = "movies")
 data class Movie(
+    @PrimaryKey(autoGenerate = false)
     val id: Int, // 290859
     val popularity: Double, // 64.094
     val video: Boolean, // false

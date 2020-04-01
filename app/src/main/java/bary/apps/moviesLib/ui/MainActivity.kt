@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import bary.apps.moviesLib.R
 import bary.apps.moviesLib.databinding.ActivityMainBinding
-import bary.apps.moviesLib.ui.movies.mostViewed.MostViewedMoviesFragment
+import bary.apps.moviesLib.ui.movies.popular.PopularMoviesFragment
 import bary.apps.moviesLib.ui.movies.newest.NewestMoviesFragment
 import bary.apps.moviesLib.ui.movies.topRated.TopRatedMoviesFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     private fun initTabLayout() {
         val adapter = ViewPagerAdapter(supportFragmentManager)
         adapter.addFragment(NewestMoviesFragment(), resources.getString(R.string.newest_movies))
-        adapter.addFragment(MostViewedMoviesFragment(), resources.getString(R.string.most_viewed_movies))
+        adapter.addFragment(PopularMoviesFragment(), resources.getString(R.string.popular_movies))
         adapter.addFragment(TopRatedMoviesFragment(), resources.getString(R.string.top_rated_movies))
 //        adapter.addFragment(MovieDetailFragment(), resources.getString(R.string.details_movie))
         view_pager.adapter = adapter

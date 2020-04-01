@@ -4,7 +4,6 @@ package bary.apps.moviesLib.data.database.entity
 import androidx.room.*
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "movies")
 data class MovieDetails(
     @ColumnInfo(name="id")
     @PrimaryKey(autoGenerate = false)

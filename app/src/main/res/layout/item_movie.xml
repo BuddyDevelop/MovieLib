@@ -7,6 +7,9 @@
         <variable
                 name="movie"
                 type="bary.apps.moviesLib.data.database.entity.Movie" />
+        <variable
+                name="viewModel"
+                type="bary.apps.moviesLib.ui.movies.BaseMoviesViewModel" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -144,6 +147,7 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:contentDescription="@string/image_description"
+                        android:onClick="@{(view) -> viewModel.favouriteBtnClick(view, movie)}"
                         android:id="@+id/heart_button_newest_movies"
                         android:src="@drawable/ic_favorite_border_primary_24dp"
                         android:background="?android:attr/selectableItemBackground"

@@ -1,15 +1,15 @@
-package bary.apps.moviesLib.ui.movies.newest
+package bary.apps.moviesLib.ui.movies
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import bary.apps.moviesLib.data.repository.MoviesRepository
 
-class NewestMoviesViewModelFactory(
+class BaseMoviesViewModelFactory(
     private val moviesRepository: MoviesRepository
 ) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return NewestMoviesViewModel(moviesRepository) as T
+        return BaseMoviesViewModel(moviesRepository) as T
     }
 }
