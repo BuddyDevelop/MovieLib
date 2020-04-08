@@ -34,4 +34,5 @@
     <string name="add_to_favourite">Add to Favourite</string>
     <string name="added_to_favourite">Movie %s has been added to favourites!</string>
     <string name="added_to_watchlist">Movie %s has been added to watchlist!</string>
+    <string name="no_trailer_available">There is no trailer available.</string>
 </resources>

@@ -12,4 +12,6 @@
     <color name="colorGreen">#ff669900</color>
     <color name="colorOrange">#ffffbb33</color>
     <color name="colorGrey">#dddddd</color>
+    <color name="contentContainerColor">#eeeeee</color>
+    <color name="suggestionSelectedTextColor">#212121</color>
 </resources>

@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import bary.apps.moviesLib.R
 import bary.apps.moviesLib.databinding.TopRatedMoviesFragmentBinding
-import bary.apps.moviesLib.ui.RecyclerItemClick
+import bary.apps.moviesLib.util.RecyclerItemClick
 import bary.apps.moviesLib.ui.base.ScopedFragment
 import bary.apps.moviesLib.ui.movies.BaseMoviesViewModel
 import bary.apps.moviesLib.ui.movies.BaseMoviesViewModelFactory
@@ -19,16 +19,14 @@ import bary.apps.moviesLib.ui.movies.MovieItem
 import bary.apps.moviesLib.ui.movies.MovieToMovieItemConverter
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
-import kotlinx.android.synthetic.main.activity_movie_detail.view.*
 import kotlinx.android.synthetic.main.list_movies.*
 import kotlinx.coroutines.launch
-import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
-import org.kodein.di.generic.factory
 import org.kodein.di.generic.instance
 
-class TopRatedMoviesFragment : ScopedFragment(), RecyclerItemClick, MovieToMovieItemConverter, KodeinAware {
+class TopRatedMoviesFragment : ScopedFragment(),
+    RecyclerItemClick, MovieToMovieItemConverter, KodeinAware {
     override val kodein by closestKodein()
     private val viewModelFactory: BaseMoviesViewModelFactory by instance()
 

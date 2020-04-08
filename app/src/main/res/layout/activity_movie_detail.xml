@@ -77,11 +77,12 @@
             <ImageView
                     android:id="@+id/poster"
                     android:layout_width="wrap_content"
-                    android:layout_height="200dp"
+                    android:layout_height="150dp"
                     android:layout_margin="8dp"
                     android:contentDescription="@string/image_description"
                     android:paddingTop="8dp"
-                    app:imageUrl="@{ConstantsKt.BASE_BACKDROP_PATH + movie.posterPath}"
+                    placeholderImage="@{@drawable/no_image}"
+                    imageUrl="@{movie.posterPath != null ? ConstantsKt.BASE_BACKDROP_PATH + movie.posterPath : null}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/movie_title" />
 

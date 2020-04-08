@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+                name="movies"
+                type="bary.apps.moviesLib.data.network.response.MoviesResponse" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="bary.apps.moviesLib.ui.movies.searchMovies.SearchActivity">
+
+        <com.paulrybitskyi.persistentsearchview.PersistentSearchView
+                android:id="@+id/persistentSearchView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:paddingLeft="4dp"
+                android:paddingStart="4dp"
+                android:paddingRight="4dp"
+                android:paddingEnd="4dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@android:color/white"
+                app:leftButtonDrawable="@drawable/ic_arrow_left_black_24dp"
+                app:clearInputButtonDrawable="@drawable/ic_close_black_24dp"
+                app:queryInputTextColor="@color/suggestionSelectedTextColor"
+                app:queryInputHintColor="@color/colorSilver"
+                app:queryInputCursorColor="@color/colorAccent"
+                app:queryInputBarIconColor="@color/colorSilver"
+                app:progressBarColor="@color/colorAccent"
+                app:dividerColor="@color/colorGrey"
+                app:suggestionIconColor="@color/colorSilver"
+                app:suggestionRecentSearchIconColor="@color/colorSilver"
+                app:suggestionSearchSuggestionIconColor="@color/colorSilver"
+                app:suggestionTextColor="@color/colorSilver"
+                app:suggestionSelectedTextColor="@color/suggestionSelectedTextColor"
+                app:isDismissableOnTouchOutside="true"
+                app:isProgressBarEnabled="true"
+                app:isVoiceInputButtonEnabled="true"
+                app:isClearInputButtonEnabled="true"
+                app:areSuggestionsDisabled="true"
+                app:shouldDimBehind="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/search_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="4dp"
+                android:paddingStart="4dp"
+                android:paddingRight="4dp"
+                android:paddingEnd="4dp"
+                android:paddingTop="60dp"
+                android:paddingBottom="4dp"
+                android:clipToPadding="false"
+                android:overScrollMode="never"
+                android:scrollbars="none"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

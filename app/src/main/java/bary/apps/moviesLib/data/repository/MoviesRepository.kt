@@ -12,5 +12,6 @@ interface MoviesRepository {
     suspend fun getMostPopularMovies() : LiveData<MoviesResponse>
     suspend fun getTopRatedMovies() : LiveData<MoviesResponse>
     suspend fun getMovieTrailers(movieId: String): LiveData<Videos>
+    suspend fun getSearchedMovies(movieName: String) : LiveData<MoviesResponse>
     fun updateMovie(movie: Movie)
 }

@@ -9,6 +9,8 @@ import bary.apps.moviesLib.data.network.newestMovies.NewestMoviesNetworkDataSour
 import bary.apps.moviesLib.data.network.newestMovies.NewestMoviesNetworkDataSourceImpl
 import bary.apps.moviesLib.data.network.popularMovies.PopularMoviesNetworkDataSource
 import bary.apps.moviesLib.data.network.popularMovies.PopularMoviesNetworkDataSourceImpl
+import bary.apps.moviesLib.data.network.searchMovies.SearchMoviesNetworkDataSource
+import bary.apps.moviesLib.data.network.searchMovies.SearchMoviesNetworkDataSourceImpl
 import bary.apps.moviesLib.data.network.topRatedMovies.TopRatedMoviesNetworkDataSource
 import bary.apps.moviesLib.data.network.topRatedMovies.TopRatedMoviesNetworkDataSourceImpl
 import bary.apps.moviesLib.data.network.trailers.TrailerNetworkDataSource
@@ -33,12 +35,13 @@ class MoviesApplication : Application(), KodeinAware {
         bind() from singleton { TmdbApiService(instance()) }
         bind<MovieDetailsNetworkDataSource>() with singleton { MovieDetailsNetworkDataSourceImpl(instance()) }
         bind<TrailerNetworkDataSource>() with singleton { TrailerNetworkDataSourceImpl(instance()) }
-        bind<MoviesRepository>() with  singleton { MoviesRepositoryImpl(instance(), instance(), instance(), instance(), instance(), instance()) }
+        bind<MoviesRepository>() with  singleton { MoviesRepositoryImpl(instance(), instance(), instance(), instance(), instance(), instance(), instance()) }
         bind() from factory { movieId: String -> MovieDetailViewModelFactory(instance(), movieId) }
         bind() from provider { BaseMoviesViewModelFactory(instance()) }
         bind<NewestMoviesNetworkDataSource>() with singleton { NewestMoviesNetworkDataSourceImpl(instance()) }
         bind<PopularMoviesNetworkDataSource>() with singleton { PopularMoviesNetworkDataSourceImpl(instance()) }
         bind<TopRatedMoviesNetworkDataSource>() with singleton { TopRatedMoviesNetworkDataSourceImpl(instance()) }
+        bind<SearchMoviesNetworkDataSource>() with singleton { SearchMoviesNetworkDataSourceImpl(instance()) }
     }
 
     override fun onCreate() {

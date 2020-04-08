@@ -1,10 +1,10 @@
-package bary.apps.moviesLib.ui
+package bary.apps.moviesLib.util
 
 import android.view.View
-import android.widget.Toast
 import bary.apps.moviesLib.R
 import bary.apps.moviesLib.data.database.entity.Movie
 import bary.apps.moviesLib.data.repository.MoviesRepository
+import com.shashank.sony.fancytoastlib.FancyToast
 
 interface FavouriteClickListener {
     val moviesRepository: MoviesRepository
@@ -13,6 +13,6 @@ interface FavouriteClickListener {
         movie.isFavourite = true
         moviesRepository.updateMovie(movie)
         val addedToFavouriteMsg: String = view.context.getString(R.string.added_to_favourite, movie.title)
-        Toast.makeText(view.context, addedToFavouriteMsg, Toast.LENGTH_LONG).show()
+        FancyToast.makeText(view.context, addedToFavouriteMsg, FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show()
     }
 }

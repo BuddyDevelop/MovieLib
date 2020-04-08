@@ -9,6 +9,7 @@ import bary.apps.moviesLib.data.network.newestMovies.NewestMoviesNetworkDataSour
 import bary.apps.moviesLib.data.network.popularMovies.PopularMoviesNetworkDataSource
 import bary.apps.moviesLib.data.network.response.MoviesResponse
 import bary.apps.moviesLib.data.network.response.Videos
+import bary.apps.moviesLib.data.network.searchMovies.SearchMoviesNetworkDataSource
 import bary.apps.moviesLib.data.network.topRatedMovies.TopRatedMoviesNetworkDataSource
 import bary.apps.moviesLib.data.network.trailers.TrailerNetworkDataSource
 import kotlinx.coroutines.Dispatchers
@@ -23,7 +24,8 @@ class MoviesRepositoryImpl(
     private val newestMoviesNetworkDataSource: NewestMoviesNetworkDataSource,
     private val movieTrailerNetworkDataSource: TrailerNetworkDataSource,
     private val popularMoviesNetworkDataSource: PopularMoviesNetworkDataSource,
-    private val topRatedMoviesNetworkDataSource: TopRatedMoviesNetworkDataSource
+    private val topRatedMoviesNetworkDataSource: TopRatedMoviesNetworkDataSource,
+    private val searchMoviesNetworkDataSource: SearchMoviesNetworkDataSource
 ) : MoviesRepository {
 
     override fun updateMovie(movie: Movie){
@@ -96,4 +98,17 @@ class MoviesRepositoryImpl(
         topRatedMoviesNetworkDataSource.fetchTopRatedMovies()
     }
     //end top rated movies
+
+    //search movies
+    override suspend fun getSearchedMovies(movieName: String): LiveData<MoviesResponse> {
+        return withContext(Dispatchers.IO){
+            searchMovies(movieName)
+            return@withContext(searchMoviesNetworkDataSource.downloadedMovies)
+        }
+    }
+
+    private suspend fun searchMovies(movieName: String){
+        searchMoviesNetworkDataSource.fetchMoviesByName(movieName)
+    }
+    //end search movies
 }

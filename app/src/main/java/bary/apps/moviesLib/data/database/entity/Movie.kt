@@ -15,9 +15,9 @@ data class Movie(
     val popularity: Double, // 64.094
     val video: Boolean, // false
     @SerializedName("poster_path")
-    val posterPath: String, // /vqzNJRH4YyquRiWxCCOH0aXggHI.jpg
+    val posterPath: String?, // /vqzNJRH4YyquRiWxCCOH0aXggHI.jpg
     @SerializedName("backdrop_path")
-    val backdropPath: String, // /riTANvQ8GKmQbgtC1ps3OfkU43A.jpg
+    val backdropPath: String?, // /riTANvQ8GKmQbgtC1ps3OfkU43A.jpg
     @SerializedName("original_language")
     val originalLanguage: String, // en
     @SerializedName("original_title")

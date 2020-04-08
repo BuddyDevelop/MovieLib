@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import bary.apps.moviesLib.R
 import bary.apps.moviesLib.databinding.PopularMoviesFragmentBinding
-import bary.apps.moviesLib.ui.RecyclerItemClick
+import bary.apps.moviesLib.util.RecyclerItemClick
 import bary.apps.moviesLib.ui.base.ScopedFragment
 import bary.apps.moviesLib.ui.movies.MovieItem
 import bary.apps.moviesLib.ui.movies.BaseMoviesViewModel
@@ -26,7 +26,8 @@ import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 
 
-class PopularMoviesFragment : ScopedFragment(), MovieToMovieItemConverter, RecyclerItemClick, KodeinAware {
+class PopularMoviesFragment : ScopedFragment(), MovieToMovieItemConverter,
+    RecyclerItemClick, KodeinAware {
     override val kodein by closestKodein()
     private val viewModelFactory: BaseMoviesViewModelFactory by instance()
 

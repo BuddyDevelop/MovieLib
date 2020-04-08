@@ -1,4 +1,4 @@
-package bary.apps.moviesLib.ui
+package bary.apps.moviesLib.util
 
 import android.content.Intent
 import androidx.fragment.app.Fragment

@@ -33,6 +33,11 @@ interface TmdbApiService {
     @GET("/3/movie/top_rated")
     fun getTopRatedMovies() : Deferred<MoviesResponse>
 
+    @GET("/3/search/movie")
+    fun searchMovies(
+        @Query("query") movieName: String
+    ) : Deferred<MoviesResponse>
+
     @GET("/3/discover/movie?")
     fun getMoviesByVoteCountAndSortByRelaseDate(
         @Query("vote_count.gte") voteCount: String,

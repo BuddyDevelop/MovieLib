@@ -12,6 +12,7 @@ import bary.apps.moviesLib.internal.MovieNotFoundException
 import bary.apps.moviesLib.ui.base.ScopedActivity
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.shashank.sony.fancytoastlib.FancyToast
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
@@ -51,8 +52,19 @@ class MovieDetailActivity : ScopedActivity(), KodeinAware {
             if(it == null) return@Observer
 
             //cuz library does not provide data binding setters so adapter is not possible to append
-            val trailerTypeMovie = it.videos.first { video -> video.type == "Trailer" }
-            initYouTubePlayer(trailerTypeMovie)
+            //if movie has any video at all
+            if(it.videos.isNotEmpty()) {
+                val trailerTypeMovie = it.videos.first { video -> video.type == "Trailer" }
+                initYouTubePlayer(trailerTypeMovie)
+            } else {
+                FancyToast.makeText(
+                    this@MovieDetailActivity,
+                    getString(R.string.no_trailer_available),
+                    FancyToast.LENGTH_LONG,
+                    FancyToast.ERROR,
+                    false
+                ).show()
+            }
         })
     }
 
