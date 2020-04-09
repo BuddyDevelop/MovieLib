@@ -17,7 +17,7 @@ const val VOTE_COUNT_50 = "50"
 const val SORT_BY_RELEASE_DATE_DESC = "primary_release_date.desc"
 const val LANGUAGE_CODE_EN = "en"
 
-class BaseMoviesViewModel(
+open class BaseMoviesViewModel(
     override val moviesRepository: MoviesRepository
 ) : ViewModel(), FavouriteClickListener,
     WatchlistClickListener {

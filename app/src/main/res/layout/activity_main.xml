@@ -1,45 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        android:id="@+id/main_layout"
+<layout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        tools:context="bary.apps.moviesLib.ui.MainActivity">
+        xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary">
-
-            <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:title="@string/app_name"
-                    app:layout_scrollFlags="scroll|enterAlways"/>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.viewpager.widget.ViewPager
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="?android:attr/actionBarSize"
-            android:id="@+id/view_pager">
+            android:fitsSystemWindows="true"
+            android:id="@+id/main_layout"
+            tools:context="bary.apps.moviesLib.ui.MainActivity">
 
-        <com.google.android.material.tabs.TabLayout
+        <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/tab_layout"
-                app:tabMode="fixed"
-                app:tabIndicatorColor="@color/colorPrimary"
-                app:tabTextColor="@color/colorPrimary"
-                android:layout_gravity="top">
+                android:background="@color/colorPrimary">
 
-        </com.google.android.material.tabs.TabLayout>
-    </androidx.viewpager.widget.ViewPager>
+                <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:title="@string/app_name"/>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <com.andremion.floatingnavigationview.FloatingNavigationView
+                android:id="@+id/floating_navigation_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fabCustomSize="30dp"
+                app:borderWidth="0dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                app:layout_anchor="@id/toolbar"
+                app:drawMenuBelowFab="false"
+                app:layout_anchorGravity="center_vertical|end"
+                app:backgroundTint="@color/colorPrimary"
+                app:elevation="4dp"
+                app:headerLayout="@layout/navigation_view_header"
+                app:menu="@menu/menu_navigation_view" />
+
+        <androidx.viewpager.widget.ViewPager
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="?android:attr/actionBarSize"
+                android:id="@+id/view_pager">
+
+            <com.google.android.material.tabs.TabLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tab_layout"
+                    app:tabMode="fixed"
+                    app:tabIndicatorColor="@color/colorPrimary"
+                    app:tabTextColor="@color/colorPrimary"
+                    android:layout_gravity="top">
+
+            </com.google.android.material.tabs.TabLayout>
+        </androidx.viewpager.widget.ViewPager>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

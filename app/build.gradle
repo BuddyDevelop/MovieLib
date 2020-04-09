@@ -76,7 +76,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     // LiveData
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
-    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
 
 //Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
@@ -107,4 +107,13 @@ dependencies {
 
 // Facebook shimmer effect dependency
     implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+
+//search view2
+    implementation "com.paulrybitskyi.persistentsearchview:persistentsearchview:1.1.2"
+
+//fancy toast msg
+    implementation 'com.github.Shashank02051997:FancyToast-Android:0.1.6'
+
+//floating navigation view
+    implementation 'com.github.andremion:floatingnavigationview:1.2.0'
 }
