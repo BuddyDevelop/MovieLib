@@ -10,9 +10,14 @@ interface FavouriteClickListener {
     val moviesRepository: MoviesRepository
 
     fun favouriteBtnClick(view: View, movie: Movie){
-        movie.isFavourite = true
-        moviesRepository.updateMovie(movie)
-        val addedToFavouriteMsg: String = view.context.getString(R.string.added_to_favourite, movie.title)
+        val addedToFavouriteMsg: String =
+            view.context.getString(R.string.added_to_favourite, movie.title)
+
+        if(movie.isFavourite == null || movie.isFavourite == false) {
+            movie.isFavourite = true
+            moviesRepository.favMovieInsertOrUpdate(movie.id, movie)
+        }
+
         FancyToast.makeText(view.context, addedToFavouriteMsg, FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show()
     }
 }

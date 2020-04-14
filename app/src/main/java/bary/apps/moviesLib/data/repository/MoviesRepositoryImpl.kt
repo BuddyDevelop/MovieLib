@@ -28,9 +28,67 @@ class MoviesRepositoryImpl(
     private val searchMoviesNetworkDataSource: SearchMoviesNetworkDataSource
 ) : MoviesRepository {
 
+    //replace movie in db
     override fun updateMovie(movie: Movie){
         GlobalScope.launch(Dispatchers.IO){
             movieDao.updateMovie(movie)
+        }
+    }
+
+    //delete movie from db
+    override fun deleteMovie(id: Int) {
+        GlobalScope.launch(Dispatchers.IO){
+            movieDao.deleteMovie(id)
+        }
+    }
+
+    //if movie with given id not exist in db insert otherwise set movie to FAV
+    override fun favMovieInsertOrUpdate(id: Int, movie: Movie){
+        GlobalScope.launch(Dispatchers.IO){
+            val movieRecord = movieDao.getMovie(id)
+
+            if(movieRecord == null)
+                movieDao.updateMovie(movie)
+            else
+                movieDao.setFavouriteMovie(id)
+        }
+    }
+
+    //unset fav movie or delete from db if is not in watchlist
+    override fun favMovieRemoveOrUpdate(id: Int){
+        GlobalScope.launch(Dispatchers.IO) {
+            val movieRecord = movieDao.getMovie(id)
+
+            if (movieRecord != null) {
+                if (movieRecord.isWatchlist == true)
+                    movieDao.removeFavouriteMovie(id)
+                else
+                    movieDao.deleteMovie(id)
+            }
+        }
+    }
+
+    //if movie with given id not exist in db insert otherwise set movie to WATCHLIST
+    override fun watchlistMovieInsertOrUpdate(id: Int, movie: Movie){
+        GlobalScope.launch(Dispatchers.IO){
+            val movieRecord = movieDao.getMovie(id)
+
+            if(movieRecord == null)
+                movieDao.updateMovie(movie)
+            else
+                movieDao.setWatchlistMovie(id)
+        }
+    }
+
+    //unset watchlist movie or delete from db if is not in favourite
+    override fun watchlistMovieRemoveOrUpdate(id: Int){
+        val movieRecord = movieDao.getMovie(id)
+
+        if(movieRecord!= null ) {
+            if (movieRecord.isFavourite == true)
+                movieDao.removeWatchlistMovie(id)
+            else
+                movieDao.deleteMovie(id)
         }
     }
 
@@ -111,4 +169,28 @@ class MoviesRepositoryImpl(
         searchMoviesNetworkDataSource.fetchMoviesByName(movieName)
     }
     //end search movies
+
+    override suspend fun getFavouriteMovies(): LiveData<List<Movie>> {
+        return withContext(Dispatchers.IO){
+            return@withContext(movieDao.getFavouriteMovies())
+        }
+    }
+
+    override suspend fun getWatchlistMovies(): LiveData<List<Movie>> {
+        return withContext(Dispatchers.IO){
+            return@withContext(movieDao.getWatchlistMovies())
+        }
+    }
+
+    override suspend fun getFavouriteMoviesCount(): LiveData<Int> {
+        return withContext(Dispatchers.IO){
+            return@withContext(movieDao.getFavouriteMoviesCount())
+        }
+    }
+
+    override suspend fun getWatchlistMoviesCount(): LiveData<Int> {
+        return withContext(Dispatchers.IO){
+            return@withContext(movieDao.getWatchlistMoviesCount())
+        }
+    }
 }

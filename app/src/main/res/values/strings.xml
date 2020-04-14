@@ -14,6 +14,8 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+    <string name="menu_favourites">Favourites</string>
+    <string name="menu_watchlist">Watchlist</string>
     <string name="menu_dark_mode">Dark mode</string>
     <string name="menu_my_movies">My movies</string>
     <string name="search_title_dots">Search&#8230;</string>
@@ -35,4 +37,9 @@
     <string name="added_to_favourite">Movie %s has been added to favourites!</string>
     <string name="added_to_watchlist">Movie %s has been added to watchlist!</string>
     <string name="no_trailer_available">There is no trailer available.</string>
+    <string name="theme">Theme</string>
+    <string name="saved_movies">Saved movies</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <string name="home_second">Home Second</string>
 </resources>

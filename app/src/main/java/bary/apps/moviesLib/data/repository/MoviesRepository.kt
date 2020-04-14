@@ -14,4 +14,13 @@ interface MoviesRepository {
     suspend fun getMovieTrailers(movieId: String): LiveData<Videos>
     suspend fun getSearchedMovies(movieName: String) : LiveData<MoviesResponse>
     fun updateMovie(movie: Movie)
+    fun deleteMovie(id: Int)
+    fun favMovieInsertOrUpdate(id: Int, movie: Movie)
+    fun favMovieRemoveOrUpdate(id: Int)
+    fun watchlistMovieInsertOrUpdate(id: Int, movie: Movie)
+    fun watchlistMovieRemoveOrUpdate(id: Int)
+    suspend fun getFavouriteMovies() : LiveData<List<Movie>>
+    suspend fun getWatchlistMovies() : LiveData<List<Movie>>
+    suspend fun getFavouriteMoviesCount() : LiveData<Int>
+    suspend fun getWatchlistMoviesCount() : LiveData<Int>
 }

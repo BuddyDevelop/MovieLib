@@ -4,7 +4,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:background="@drawable/header_bg"
+        android:background="@drawable/purple_bg"
         android:gravity="bottom|center"
         android:orientation="vertical"
         android:paddingLeft="@dimen/activity_horizontal_margin"

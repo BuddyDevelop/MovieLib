@@ -9,10 +9,15 @@ import com.shashank.sony.fancytoastlib.FancyToast
 interface WatchlistClickListener {
     val moviesRepository: MoviesRepository
 
-    fun watchlistBtnClick(view: View, movie: Movie){
-        movie.isWatchlist = true
-        moviesRepository.updateMovie(movie)
-        val addedToFavouriteMsg: String = view.context.getString(R.string.added_to_watchlist, movie.title)
+    fun watchlistBtnClick(view: View, movie: Movie) {
+        val addedToFavouriteMsg: String =
+            view.context.getString(R.string.added_to_watchlist, movie.title)
+
+        if(movie.isWatchlist == null || movie.isWatchlist == false) {
+            movie.isWatchlist = true
+            moviesRepository.watchlistMovieInsertOrUpdate(movie.id, movie)
+        }
+
         FancyToast.makeText(view.context, addedToFavouriteMsg, FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show()
     }
 }

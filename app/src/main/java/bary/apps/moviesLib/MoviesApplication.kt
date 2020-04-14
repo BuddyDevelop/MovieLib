@@ -17,6 +17,7 @@ import bary.apps.moviesLib.data.network.trailers.TrailerNetworkDataSource
 import bary.apps.moviesLib.data.network.trailers.TrailerNetworkDataSourceImpl
 import bary.apps.moviesLib.data.repository.MoviesRepository
 import bary.apps.moviesLib.data.repository.MoviesRepositoryImpl
+import bary.apps.moviesLib.ui.MainViewModelFactory
 import bary.apps.moviesLib.ui.movies.details.MovieDetailViewModelFactory
 import bary.apps.moviesLib.ui.movies.BaseMoviesViewModelFactory
 import com.jakewharton.threetenabp.AndroidThreeTen
@@ -42,6 +43,7 @@ class MoviesApplication : Application(), KodeinAware {
         bind<PopularMoviesNetworkDataSource>() with singleton { PopularMoviesNetworkDataSourceImpl(instance()) }
         bind<TopRatedMoviesNetworkDataSource>() with singleton { TopRatedMoviesNetworkDataSourceImpl(instance()) }
         bind<SearchMoviesNetworkDataSource>() with singleton { SearchMoviesNetworkDataSourceImpl(instance()) }
+        bind() from provider { MainViewModelFactory(instance()) }
     }
 
     override fun onCreate() {

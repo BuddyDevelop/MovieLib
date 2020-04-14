@@ -5,21 +5,32 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
+import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import bary.apps.moviesLib.R
 import bary.apps.moviesLib.databinding.ActivityMainBinding
+import bary.apps.moviesLib.ui.base.ScopedActivity
 import bary.apps.moviesLib.ui.movies.newest.NewestMoviesFragment
 import bary.apps.moviesLib.ui.movies.popular.PopularMoviesFragment
 import bary.apps.moviesLib.ui.movies.searchMovies.SearchActivity
 import bary.apps.moviesLib.ui.movies.topRated.TopRatedMoviesFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.menu_badge.view.*
+import kotlinx.coroutines.launch
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.closestKodein
+import org.kodein.di.generic.instance
 
 const val NIGHT_UI_MODE: Int = 33
 const val NIGHT_MODE_MASK: Int = 48
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ScopedActivity(), KodeinAware {
+    override val kodein by closestKodein()
     private lateinit var binding: ActivityMainBinding
+    private lateinit var viewModel: MainViewModel
+    private val viewModelFactory: MainViewModelFactory by instance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,8 +38,30 @@ class MainActivity : AppCompatActivity() {
         setContentView( binding.root )
         setSupportActionBar(binding.toolbar)
 
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+
         initTabLayout()
         initFloatingNavigationView()
+        getFavouriteMoviesCount()
+        getWatchlistMoviesCount()
+    }
+
+    //show count of favourite movies in navigation drawer
+    private fun getFavouriteMoviesCount() = launch{
+        val item: View = floating_navigation_view.menu.findItem(R.id.nav_favourites).actionView
+
+        viewModel.favouriteMoviesCount.await().observe(this@MainActivity, Observer {
+            item.notification_badge.text = it.toString()
+        })
+    }
+
+    //show count of watchlist movies in navigation drawer
+    private fun getWatchlistMoviesCount() = launch {
+        val item: View = floating_navigation_view.menu.findItem(R.id.nav_watchlist).actionView
+
+        viewModel.watchlistMovieCount.await().observe(this@MainActivity, Observer {
+            item.notification_badge.text = it.toString()
+        })
     }
 
     private fun initTabLayout() {
@@ -78,10 +111,10 @@ class MainActivity : AppCompatActivity() {
                    if( uiMode == NIGHT_UI_MODE && nightMask == NIGHT_MODE_MASK )
                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                    else
-                       AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                       AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
 
                }
-               else -> false
+
            }
             floating_navigation_view.close()
             false
