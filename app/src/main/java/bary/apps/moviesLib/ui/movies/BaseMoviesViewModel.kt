@@ -38,6 +38,14 @@ open class BaseMoviesViewModel(
         moviesRepository.getTopRatedMovies()
     }
 
+    val favouriteMovies by lazyDeferred {
+        moviesRepository.getFavouriteMovies()
+    }
+
+    val watchlistMovies by lazyDeferred {
+        moviesRepository.getWatchlistMovies()
+    }
+
     private val _searchedMovies = MutableLiveData<MoviesResponse>()
     val searchedMovies: LiveData<MoviesResponse>
         get() = _searchedMovies

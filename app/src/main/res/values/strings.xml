@@ -35,11 +35,21 @@
     <string name="add_to_watchlist">Add to Watchlist</string>
     <string name="add_to_favourite">Add to Favourite</string>
     <string name="added_to_favourite">Movie %s has been added to favourites!</string>
+    <string name="removed_from_favourite">Movie %s has been deleted from favourites!</string>
     <string name="added_to_watchlist">Movie %s has been added to watchlist!</string>
+    <string name="removed_from_watchlist">Movie %s has been removed from watchlist!</string>
     <string name="no_trailer_available">There is no trailer available.</string>
     <string name="theme">Theme</string>
     <string name="saved_movies">Saved movies</string>
-    <string name="title_activity_main2">Main2Activity</string>
+    <string name="remove_favourites_title_msg">Remove movie from favourites</string>
+    <string name="remove_favourites_msg">Do you want to delete movie from favourites?</string>
+    <string name="remove_watchlist_title_msg">Remove movie from watchlist</string>
+    <string name="remove_watchlist_msg">Do you want to delete movie from watchlist?</string>
+
 
     <string name="home_second">Home Second</string>
+    <string name="no_data">There is no data to show.</string>
+    
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

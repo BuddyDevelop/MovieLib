@@ -26,10 +26,10 @@ interface MovieDao {
     fun setWatchlistMovie(id: Int, isWatchlist: Boolean = true)
 
     @Query("update movies set isFavourite = :isFavourite where id = :id")
-    fun removeWatchlistMovie(id: Int, isFavourite: Boolean = false)
+    fun removeFavouriteMovie(id: Int, isFavourite: Boolean = false)
 
     @Query("update movies set isWatchlist = :isWatchlist where id = :id")
-    fun removeFavouriteMovie(id: Int, isWatchlist: Boolean = false)
+    fun removeWatchlistMovie(id: Int, isWatchlist: Boolean = false)
 
     @Query("select * from movies where id = :movieId limit 1")
     fun getMovie(movieId: Int): Movie?

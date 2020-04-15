@@ -5,19 +5,31 @@ import bary.apps.moviesLib.R
 import bary.apps.moviesLib.data.database.entity.Movie
 import bary.apps.moviesLib.data.repository.MoviesRepository
 import com.shashank.sony.fancytoastlib.FancyToast
+import kotlinx.android.synthetic.main.item_movie.view.*
 
-interface WatchlistClickListener {
+interface WatchlistClickListener : RemovalAlertDialog {
     val moviesRepository: MoviesRepository
 
     fun watchlistBtnClick(view: View, movie: Movie) {
-        val addedToFavouriteMsg: String =
-            view.context.getString(R.string.added_to_watchlist, movie.title)
+        val addBtn = view.add_watchlist_btn
 
-        if(movie.isWatchlist == null || movie.isWatchlist == false) {
+        if (addBtn != null && addBtn.tag?.toString() == REMOVE_ACTION_TAG) { //remove watchlist movie from database
+            val dialogTitle = view.context.getString(R.string.remove_watchlist_title_msg)
+            val dialogMsg = view.context.getString(R.string.remove_watchlist_msg)
+            val removedFromWatchlistMsg: String =
+                view.context.getString(R.string.removed_from_watchlist, movie.title)
+
+            alertDialog(view.context, dialogTitle, dialogMsg, removedFromWatchlistMsg, movie.id)
+            { moviesRepository.watchlistMovieRemoveOrUpdate(movie.id) }
+        }
+        else {  //add watchlist movie to database
+            val addedToWatchlistMsg: String =
+                view.context.getString(R.string.added_to_watchlist, movie.title)
+
             movie.isWatchlist = true
             moviesRepository.watchlistMovieInsertOrUpdate(movie.id, movie)
-        }
 
-        FancyToast.makeText(view.context, addedToFavouriteMsg, FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show()
+            FancyToast.makeText(view.context, addedToWatchlistMsg, FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show()
+        }
     }
 }

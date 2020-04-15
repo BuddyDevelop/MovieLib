@@ -14,7 +14,7 @@ import bary.apps.moviesLib.databinding.NewestMoviesFragmentBinding
 import bary.apps.moviesLib.ui.base.ScopedFragment
 import bary.apps.moviesLib.ui.movies.MovieItem
 import bary.apps.moviesLib.ui.movies.BaseMoviesViewModel
-import bary.apps.moviesLib.ui.movies.MovieToMovieItemConverter
+import bary.apps.moviesLib.util.MovieToMovieItemConverter
 import bary.apps.moviesLib.util.RecyclerItemClick
 import bary.apps.moviesLib.ui.movies.BaseMoviesViewModelFactory
 import com.xwray.groupie.GroupAdapter
@@ -26,7 +26,8 @@ import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 
 
-class NewestMoviesFragment : ScopedFragment(), MovieToMovieItemConverter,
+class NewestMoviesFragment : ScopedFragment(),
+    MovieToMovieItemConverter,
     RecyclerItemClick, KodeinAware {
     override val kodein by closestKodein()
     private val viewModelFactory: BaseMoviesViewModelFactory by instance()
@@ -57,7 +58,7 @@ class NewestMoviesFragment : ScopedFragment(), MovieToMovieItemConverter,
 
             group_loading.stopShimmerAnimation()
             group_loading.visibility = View.GONE
-            initRecyclerView(it.toMoviesEntries())
+            initRecyclerView(toMoviesEntries(it.movies))
         })
     }
 

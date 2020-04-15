@@ -13,7 +13,7 @@ import bary.apps.moviesLib.ui.base.ScopedActivity
 import bary.apps.moviesLib.ui.movies.BaseMoviesViewModel
 import bary.apps.moviesLib.ui.movies.BaseMoviesViewModelFactory
 import bary.apps.moviesLib.ui.movies.MovieItem
-import bary.apps.moviesLib.ui.movies.MovieToMovieItemConverter
+import bary.apps.moviesLib.util.MovieToMovieItemConverter
 import bary.apps.moviesLib.ui.movies.details.MovieDetailActivity
 import com.paulrybitskyi.persistentsearchview.listeners.OnSearchConfirmedListener
 import com.paulrybitskyi.persistentsearchview.utils.VoiceRecognitionDelegate
@@ -25,7 +25,8 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
 import org.kodein.di.generic.instance
 
-class SearchActivity : ScopedActivity(), MovieToMovieItemConverter, KodeinAware {
+class SearchActivity : ScopedActivity(),
+    MovieToMovieItemConverter, KodeinAware {
     override val kodein by closestKodein()
     private val viewModelFactory: BaseMoviesViewModelFactory by instance()
 
@@ -50,7 +51,7 @@ class SearchActivity : ScopedActivity(), MovieToMovieItemConverter, KodeinAware 
             if(it == null) return@Observer
 
             binding.movies = it
-            initRecyclerView(it.toMoviesEntries())
+            initRecyclerView(toMoviesEntries(it.movies))
         })
     }
 

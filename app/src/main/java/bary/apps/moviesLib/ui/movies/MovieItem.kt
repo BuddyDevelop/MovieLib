@@ -5,9 +5,9 @@ import bary.apps.moviesLib.data.database.entity.Movie
 import bary.apps.moviesLib.databinding.ItemMovieBindingImpl
 import com.xwray.groupie.databinding.BindableItem
 
-class MovieItem(
-    val movieItem: Movie,
-    val viewModel: BaseMoviesViewModel
+open class MovieItem(
+    open val movieItem: Movie,
+    open val viewModel: BaseMoviesViewModel
 ) : BindableItem<ItemMovieBindingImpl>() {
     override fun getLayout() = R.layout.item_movie
 

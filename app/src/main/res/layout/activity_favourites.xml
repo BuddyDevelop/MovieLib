@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+                name="toolbarTitle"
+                type="String" />
+    </data>
+    
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="bary.apps.moviesLib.ui.movies.favourites.FavouritesActivity">
+
+        <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:id="@+id/fav_toolbar"
+                    app:layout_scrollFlags="scroll|enterAlways|snap"
+                    app:title="@{toolbarTitle}"
+                    android:background="@color/colorPrimary"
+                    app:contentInsetStartWithNavigation="56dp" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:id="@+id/no_data_favourites"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="?attr/actionBarSize"
+                android:text="@string/no_data"
+                android:textAppearance="@android:style/TextAppearance.Material.Headline" />
+        
+    <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="4dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:id="@+id/fav_recyclerview" />
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

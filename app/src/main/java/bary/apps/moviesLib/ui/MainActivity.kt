@@ -12,10 +12,12 @@ import androidx.lifecycle.ViewModelProvider
 import bary.apps.moviesLib.R
 import bary.apps.moviesLib.databinding.ActivityMainBinding
 import bary.apps.moviesLib.ui.base.ScopedActivity
+import bary.apps.moviesLib.ui.movies.favourites.FavouritesActivity
 import bary.apps.moviesLib.ui.movies.newest.NewestMoviesFragment
 import bary.apps.moviesLib.ui.movies.popular.PopularMoviesFragment
 import bary.apps.moviesLib.ui.movies.searchMovies.SearchActivity
 import bary.apps.moviesLib.ui.movies.topRated.TopRatedMoviesFragment
+import bary.apps.moviesLib.ui.movies.watchlist.WatchlistActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.menu_badge.view.*
 import kotlinx.coroutines.launch
@@ -114,7 +116,14 @@ class MainActivity : ScopedActivity(), KodeinAware {
                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
 
                }
-
+               R.id.nav_favourites -> {
+                   val favouriteActivityIntent = Intent(this, FavouritesActivity::class.java)
+                   startActivity(favouriteActivityIntent)
+               }
+               R.id.nav_watchlist -> {
+                   val watchlistActivityIntent = Intent(this, WatchlistActivity::class.java)
+                   startActivity(watchlistActivityIntent)
+               }
            }
             floating_navigation_view.close()
             false

@@ -16,7 +16,7 @@ import bary.apps.moviesLib.ui.base.ScopedFragment
 import bary.apps.moviesLib.ui.movies.BaseMoviesViewModel
 import bary.apps.moviesLib.ui.movies.BaseMoviesViewModelFactory
 import bary.apps.moviesLib.ui.movies.MovieItem
-import bary.apps.moviesLib.ui.movies.MovieToMovieItemConverter
+import bary.apps.moviesLib.util.MovieToMovieItemConverter
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.list_movies.*
@@ -58,7 +58,7 @@ class TopRatedMoviesFragment : ScopedFragment(),
 
             group_loading.stopShimmerAnimation()
             group_loading.visibility = View.GONE
-            initRecyclerView(it.toMoviesEntries())
+            initRecyclerView(toMoviesEntries(it.movies))
         })
     }
 

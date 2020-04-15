@@ -82,13 +82,15 @@ class MoviesRepositoryImpl(
 
     //unset watchlist movie or delete from db if is not in favourite
     override fun watchlistMovieRemoveOrUpdate(id: Int){
-        val movieRecord = movieDao.getMovie(id)
+        GlobalScope.launch(Dispatchers.IO) {
+            val movieRecord = movieDao.getMovie(id)
 
-        if(movieRecord!= null ) {
-            if (movieRecord.isFavourite == true)
-                movieDao.removeWatchlistMovie(id)
-            else
-                movieDao.deleteMovie(id)
+            if (movieRecord != null) {
+                if (movieRecord.isFavourite == true)
+                    movieDao.removeWatchlistMovie(id)
+                else
+                    movieDao.deleteMovie(id)
+            }
         }
     }
 
