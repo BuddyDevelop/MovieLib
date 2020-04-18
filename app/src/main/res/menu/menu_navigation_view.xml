@@ -6,10 +6,6 @@
         <item android:title="@string/theme">
             <menu>
                 <item
-                        android:id="@+id/nav_camera"
-                        android:icon="@drawable/ic_menu_gallery"
-                        android:title="@string/menu_gallery" />
-                <item
                         android:id="@+id/nav_dark_mode"
                         android:icon="@drawable/ic_day_night_black_24dp"
                         android:title="@string/menu_dark_mode" />
@@ -30,17 +26,4 @@
             </menu>
         </item>
     </group>
-
-    <item android:title="@string/menu_home">
-        <menu>
-            <item
-                    android:id="@+id/nav_share"
-                    android:icon="@drawable/ic_menu_share"
-                    android:title="@string/menu_share" />
-            <item
-                    android:id="@+id/nav_send"
-                    android:icon="@drawable/ic_menu_send"
-                    android:title="@string/menu_send" />
-        </menu>
-    </item>
 </menu>

@@ -41,7 +41,7 @@ interface TmdbApiService {
     @GET("/3/discover/movie?")
     fun getMoviesByVoteCountAndSortByRelaseDate(
         @Query("vote_count.gte") voteCount: String,
-        @Query("sort_by") sortBy: String = "release_date.desc",
+        @Query("sort_by") sortBy: String = "primary_release_date.desc",
         @Query("language") languageCode: String = "en"
     ): Deferred<MoviesResponse>
 

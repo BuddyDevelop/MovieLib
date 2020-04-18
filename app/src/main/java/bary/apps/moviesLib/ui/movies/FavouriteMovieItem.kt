@@ -19,6 +19,5 @@ class FavouriteMovieItem(
         binding.root.heart_fav_button.tag = REMOVE_ACTION_TAG
         //change icon
         binding.root.heart_fav_button.setImageResource(R.drawable.ic_favorite_filled_primary_24dp)
-
     }
 }

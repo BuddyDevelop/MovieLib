@@ -15,7 +15,6 @@ interface RemovalAlertDialog {
         alertDialogBuilder.setMessage(dialogMsg)
 
         alertDialogBuilder.setPositiveButton(positiveBtnText){ dialogInterface, i ->
-            dialogInterface.dismiss()
             positiveBtnAction.invoke(movieId)
             FancyToast.makeText(context, toastMsg, FancyToast.LENGTH_LONG, FancyToast.INFO, false).show()
         }
