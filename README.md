@@ -2,7 +2,7 @@
 #### An application shows newest, most popular and top rated movies according to <a href="https://www.themoviedb.org/" title="TMDb">TMDb</a>.
 #### User can search for movies, add them to watchlist, favourites and watch trailer if available.
 
-![Sample](https://user-images.githubusercontent.com/48919056/79578875-1b1db380-80c7-11ea-8128-19ce73eaa87d.gif)
+![Sample](https://user-images.githubusercontent.com/48919056/79669239-6f559000-81ba-11ea-9825-bf624c25ad40.gif)
 
 ## Functionality
 #### In main view there are three tabs displaying following movies: newest, most popular and top rated. Each of movies has two buttons to add to favourites and watchlist.
