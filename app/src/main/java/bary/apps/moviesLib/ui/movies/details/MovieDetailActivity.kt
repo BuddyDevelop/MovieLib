@@ -1,11 +1,14 @@
 package bary.apps.moviesLib.ui.movies.details
 
 import android.os.Bundle
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import bary.apps.moviesLib.R
 import bary.apps.moviesLib.data.database.entity.Movie
+import bary.apps.moviesLib.data.network.response.Review
 import bary.apps.moviesLib.data.network.response.Video
 import bary.apps.moviesLib.databinding.ActivityMovieDetailBinding
 import bary.apps.moviesLib.internal.MovieNotFoundException
@@ -13,6 +16,8 @@ import bary.apps.moviesLib.ui.base.ScopedActivity
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.shashank.sony.fancytoastlib.FancyToast
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
@@ -43,7 +48,9 @@ class MovieDetailActivity : ScopedActivity(), KodeinAware {
 
         lifecycle.addObserver(video)
 
+        initToolbar()
         loadTrailer()
+        loadReviews()
     }
 
     private fun loadTrailer() = launch {
@@ -76,4 +83,43 @@ class MovieDetailActivity : ScopedActivity(), KodeinAware {
             }
         })
     }
+
+    private fun loadReviews() = launch {
+        val movieReviews = viewModel.movieReviews.await()
+        movieReviews.observe(this@MovieDetailActivity, Observer {
+            if(it == null)
+                return@Observer
+
+            if(it.reviews.isEmpty()) //if no reviews show text
+                binding.noReviews.visibility = View.VISIBLE
+            else
+                binding.noReviews.visibility = View.GONE
+
+            initReviewsRecyclerView(toReviewEntries(it.reviews))
+        })
+    }
+
+    private fun toReviewEntries(reviews: List<Review>) : List<ReviewItem>{
+        return reviews.map {
+            ReviewItem(it)
+        }
+    }
+
+    private fun initReviewsRecyclerView(items: List<ReviewItem>){
+        val groupAdapter = GroupAdapter<ViewHolder>().apply {
+            addAll(items)
+        }
+
+        reviews_recyclerview.apply {
+            layoutManager = LinearLayoutManager(this@MovieDetailActivity)
+            adapter = groupAdapter
+        }
+    }
+
+    private fun initToolbar(){
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar.setNavigationOnClickListener { view -> onBackPressed() }
+    }
+
 }

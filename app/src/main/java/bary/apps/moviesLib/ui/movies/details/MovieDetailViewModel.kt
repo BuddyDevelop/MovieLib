@@ -16,4 +16,7 @@ class MovieDetailViewModel(
         moviesRepository.getMovieTrailers(movieId)
     }
 
+    val movieReviews by lazyDeferred {
+        moviesRepository.getMovieReviews(movieId.toInt())
+    }
 }

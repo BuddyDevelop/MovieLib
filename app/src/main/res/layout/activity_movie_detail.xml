@@ -18,13 +18,32 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true"
-            android:theme="@style/Theme.AppCompat.DayNight"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:context="bary.apps.moviesLib.ui.movies.details.MovieDetailActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.AppBarLayout
+                    android:id="@+id/appbar_movie_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/barrier"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.Toolbar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/toolbar"
+                        app:title="@string/details_movie"
+                        app:layout_scrollFlags="scroll|enterAlways|snap"
+                        app:theme="@style/ThemeOverlay.AppCompat.Dark"
+                        app:contentInsetStartWithNavigation="56dp"/>
+
+            </com.google.android.material.appbar.AppBarLayout>
 
             <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline"
@@ -48,7 +67,7 @@
                     app:autoPlay="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/barrier"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/appbar_movie_details"
                     app:showFullScreenButton="false"
                     app:showVideoDuration="true"
                     app:showYouTubeButton="true" />
@@ -225,6 +244,55 @@
                     app:layout_constraintLeft_toLeftOf="@id/guideline"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/movie_overview" />
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/colorSilver"
+                    app:layout_constraintTop_toBottomOf="@id/add_to_watchlist" />
+
+            <TextView
+                    android:id="@+id/movie_reviews"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:text="@string/reviews"
+                    android:textAlignment="textStart"
+                    android:textSize="@dimen/text_large_size"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/barrier"
+                    app:layout_constraintTop_toBottomOf="@id/add_to_watchlist" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/reviews_recyclerview"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    app:layout_constraintTop_toBottomOf="@id/movie_reviews"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold"
+                    android:id="@+id/no_reviews"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="@string/no_reviews"
+                    android:visibility="invisible"
+                    tools:visibility="visible"
+                    app:layout_constraintTop_toBottomOf="@id/reviews_recyclerview"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textAppearance="@android:style/TextAppearance.Material.Headline" />
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -8,7 +8,9 @@ import bary.apps.moviesLib.data.database.entity.MovieDetails
 import bary.apps.moviesLib.data.network.newestMovies.NewestMoviesNetworkDataSource
 import bary.apps.moviesLib.data.network.popularMovies.PopularMoviesNetworkDataSource
 import bary.apps.moviesLib.data.network.response.MoviesResponse
+import bary.apps.moviesLib.data.network.response.Reviews
 import bary.apps.moviesLib.data.network.response.Videos
+import bary.apps.moviesLib.data.network.reviews.MovieReviewsNetworkDataSource
 import bary.apps.moviesLib.data.network.searchMovies.SearchMoviesNetworkDataSource
 import bary.apps.moviesLib.data.network.topRatedMovies.TopRatedMoviesNetworkDataSource
 import bary.apps.moviesLib.data.network.trailers.TrailerNetworkDataSource
@@ -25,7 +27,8 @@ class MoviesRepositoryImpl(
     private val movieTrailerNetworkDataSource: TrailerNetworkDataSource,
     private val popularMoviesNetworkDataSource: PopularMoviesNetworkDataSource,
     private val topRatedMoviesNetworkDataSource: TopRatedMoviesNetworkDataSource,
-    private val searchMoviesNetworkDataSource: SearchMoviesNetworkDataSource
+    private val searchMoviesNetworkDataSource: SearchMoviesNetworkDataSource,
+    private val movieReviewsNetworkDataSource: MovieReviewsNetworkDataSource
 ) : MoviesRepository {
 
     //replace movie in db
@@ -171,6 +174,19 @@ class MoviesRepositoryImpl(
         searchMoviesNetworkDataSource.fetchMoviesByName(movieName)
     }
     //end search movies
+
+    //get movie reviews
+    override suspend fun getMovieReviews(movieId: Int): LiveData<Reviews> {
+        return withContext(Dispatchers.IO){
+            fetchMovieReviews(movieId)
+            return@withContext(movieReviewsNetworkDataSource.downloadedReviews)
+        }
+    }
+
+    private suspend fun fetchMovieReviews(movieId: Int){
+        movieReviewsNetworkDataSource.getReviewByMovieId(movieId)
+    }
+    //end movie reviews
 
     override suspend fun getFavouriteMovies(): LiveData<List<Movie>> {
         return withContext(Dispatchers.IO){

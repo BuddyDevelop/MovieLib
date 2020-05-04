@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import bary.apps.moviesLib.data.database.entity.Movie
 import bary.apps.moviesLib.data.database.entity.MovieDetails
 import bary.apps.moviesLib.data.network.response.MoviesResponse
+import bary.apps.moviesLib.data.network.response.Reviews
 import bary.apps.moviesLib.data.network.response.Videos
 
 interface MoviesRepository {
@@ -13,6 +14,7 @@ interface MoviesRepository {
     suspend fun getTopRatedMovies(page: Int) : LiveData<MoviesResponse>
     suspend fun getMovieTrailers(movieId: String): LiveData<Videos>
     suspend fun getSearchedMovies(movieName: String) : LiveData<MoviesResponse>
+    suspend fun getMovieReviews(movieId: Int) : LiveData<Reviews>
     fun updateMovie(movie: Movie)
     fun deleteMovie(id: Int)
     fun favMovieInsertOrUpdate(id: Int, movie: Movie)

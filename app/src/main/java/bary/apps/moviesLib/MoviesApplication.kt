@@ -9,6 +9,8 @@ import bary.apps.moviesLib.data.network.newestMovies.NewestMoviesNetworkDataSour
 import bary.apps.moviesLib.data.network.newestMovies.NewestMoviesNetworkDataSourceImpl
 import bary.apps.moviesLib.data.network.popularMovies.PopularMoviesNetworkDataSource
 import bary.apps.moviesLib.data.network.popularMovies.PopularMoviesNetworkDataSourceImpl
+import bary.apps.moviesLib.data.network.reviews.MovieReviewsNetworkDataSource
+import bary.apps.moviesLib.data.network.reviews.MovieReviewsNetworkDataSourceImpl
 import bary.apps.moviesLib.data.network.searchMovies.SearchMoviesNetworkDataSource
 import bary.apps.moviesLib.data.network.searchMovies.SearchMoviesNetworkDataSourceImpl
 import bary.apps.moviesLib.data.network.topRatedMovies.TopRatedMoviesNetworkDataSource
@@ -37,7 +39,7 @@ class MoviesApplication : Application(), KodeinAware {
         bind() from singleton { instance<MoviesDatabase>().movieDao() }
         bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
         bind() from singleton { TmdbApiService(instance()) }
-        bind<MoviesRepository>() with  singleton { MoviesRepositoryImpl(instance(), instance(), instance(), instance(), instance(), instance(), instance()) }
+        bind<MoviesRepository>() with  singleton { MoviesRepositoryImpl(instance(), instance(), instance(), instance(), instance(), instance(), instance(), instance()) }
         bind() from factory { movieId: String -> MovieDetailViewModelFactory(instance(), movieId) }
         bind() from provider { BaseMoviesViewModelFactory(instance()) }
         bind() from provider { MainViewModelFactory(instance()) }
@@ -50,6 +52,7 @@ class MoviesApplication : Application(), KodeinAware {
         bind<SearchMoviesNetworkDataSource>() with singleton { SearchMoviesNetworkDataSourceImpl(instance()) }
         bind<MovieDetailsNetworkDataSource>() with singleton { MovieDetailsNetworkDataSourceImpl(instance()) }
         bind<TrailerNetworkDataSource>() with singleton { TrailerNetworkDataSourceImpl(instance()) }
+        bind<MovieReviewsNetworkDataSource>() with singleton { MovieReviewsNetworkDataSourceImpl(instance()) }
     }
 
     override fun onCreate() {

@@ -3,6 +3,7 @@ package bary.apps.moviesLib.data.network
 import bary.apps.moviesLib.data.API_KEY
 import bary.apps.moviesLib.data.database.entity.MovieDetails
 import bary.apps.moviesLib.data.network.response.MoviesResponse
+import bary.apps.moviesLib.data.network.response.Reviews
 import bary.apps.moviesLib.data.network.response.Videos
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
@@ -50,6 +51,11 @@ interface TmdbApiService {
         @Query("page") page: Int = 1
     ): Deferred<MoviesResponse>
 
+    @GET("/3/movie/{movieId}/reviews")
+    fun getReviews(
+        @Path("movieId") movieId: Int
+    ) : Deferred<Reviews>
+
     companion object{
         operator fun invoke(
             connectivityInterceptor: ConnectivityInterceptor
@@ -81,7 +87,6 @@ interface TmdbApiService {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(TmdbApiService::class.java)
-
         }
     }
 }

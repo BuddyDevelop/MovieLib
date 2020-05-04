@@ -38,14 +38,15 @@
         <activity
                 android:name=".ui.movies.details.MovieDetailActivity"
                 android:configChanges="orientation|keyboardHidden|screenSize|layoutDirection"
-                android:theme="@style/AppTheme">
+                android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
                 android:name=".ui.movies.favourites.FavouritesActivity"
                 android:parentActivityName="bary.apps.moviesLib.ui.MainActivity"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".ui.movies.watchlist.WatchlistActivity"
+        <activity
+                android:name=".ui.movies.watchlist.WatchlistActivity"
                 android:parentActivityName="bary.apps.moviesLib.ui.MainActivity"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>

@@ -23,7 +23,7 @@
     <string name="top_rated_movies">Top rated</string>
     <string name="most_viewed_movies">Most viewed</string>
     <string name="popular_movies">Popular</string>
-    <string name="details_movie">Details</string>
+    <string name="details_movie">Movie details</string>
     <string name="loading">Loading</string>
     <string name="slash">/</string>
     <string name="popularity_colon">popularity:</string>
@@ -53,4 +53,6 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="no_data_search">No results found.</string>
+    <string name="reviews">Reviews</string>
+    <string name="no_reviews">No reviews found.</string>
 </resources>
