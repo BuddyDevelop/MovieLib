@@ -108,15 +108,15 @@ class MoviesRepositoryImpl(
     //end movies details
 
     //get list of movies
-    override suspend fun getMovies(voteCount: String, sortBy: String, languageCode: String): LiveData<MoviesResponse> {
+    override suspend fun getMovies(voteCount: String, sortBy: String, languageCode: String, page: Int): LiveData<MoviesResponse> {
         return withContext(Dispatchers.IO) {
-            fetchNewestMovies(voteCount, sortBy, languageCode)
+            fetchNewestMovies(voteCount, sortBy, languageCode, page)
             return@withContext(newestMoviesNetworkDataSource.downloadedNewestMovies)
         }
     }
 
-    private suspend fun fetchNewestMovies(voteCount: String, sortBy: String, languageCode: String) {
-        newestMoviesNetworkDataSource.fetchMovies(voteCount, sortBy, languageCode)
+    private suspend fun fetchNewestMovies(voteCount: String, sortBy: String, languageCode: String, page: Int) {
+        newestMoviesNetworkDataSource.fetchMovies(voteCount, sortBy, languageCode, page)
     }
     //end movie listing
 
@@ -134,28 +134,28 @@ class MoviesRepositoryImpl(
     //end movie trailer
 
     //get popular movies
-    override suspend fun getMostPopularMovies(): LiveData<MoviesResponse> {
+    override suspend fun getMostPopularMovies(page: Int): LiveData<MoviesResponse> {
         return withContext(Dispatchers.IO){
-            fetchPopularMovies()
+            fetchPopularMovies(page)
             return@withContext(popularMoviesNetworkDataSource.downloadedPopularMovies)
         }
     }
 
-    private suspend fun fetchPopularMovies(){
-        popularMoviesNetworkDataSource.fetchPopularMovies()
+    private suspend fun fetchPopularMovies(page: Int){
+        popularMoviesNetworkDataSource.fetchPopularMovies(page)
     }
     //end popular movies
 
     //get top rated movies
-    override suspend fun getTopRatedMovies(): LiveData<MoviesResponse> {
+    override suspend fun getTopRatedMovies(page: Int): LiveData<MoviesResponse> {
         return withContext(Dispatchers.IO){
-            fetchTopRatedMovies()
+            fetchTopRatedMovies(page)
             return@withContext(topRatedMoviesNetworkDataSource.downloadedTopRatedMovies)
         }
     }
 
-    private suspend fun fetchTopRatedMovies(){
-        topRatedMoviesNetworkDataSource.fetchTopRatedMovies()
+    private suspend fun fetchTopRatedMovies(page: Int){
+        topRatedMoviesNetworkDataSource.fetchTopRatedMovies(page)
     }
     //end top rated movies
 

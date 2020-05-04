@@ -28,10 +28,14 @@ interface TmdbApiService {
     ): Deferred<Videos>
 
     @GET("/3/movie/popular")
-    fun getPopularMovies() : Deferred<MoviesResponse>
+    fun getPopularMovies(
+        @Query("page") page: Int
+    ) : Deferred<MoviesResponse>
 
     @GET("/3/movie/top_rated")
-    fun getTopRatedMovies() : Deferred<MoviesResponse>
+    fun getTopRatedMovies(
+        @Query("page") page: Int
+    ) : Deferred<MoviesResponse>
 
     @GET("/3/search/movie")
     fun searchMovies(
@@ -42,7 +46,8 @@ interface TmdbApiService {
     fun getMoviesByVoteCountAndSortByRelaseDate(
         @Query("vote_count.gte") voteCount: String,
         @Query("sort_by") sortBy: String = "primary_release_date.desc",
-        @Query("language") languageCode: String = "en"
+        @Query("language") languageCode: String = "en",
+        @Query("page") page: Int = 1
     ): Deferred<MoviesResponse>
 
     companion object{

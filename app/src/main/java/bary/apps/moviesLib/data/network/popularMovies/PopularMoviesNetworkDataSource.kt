@@ -6,5 +6,5 @@ import bary.apps.moviesLib.data.network.response.MoviesResponse
 interface PopularMoviesNetworkDataSource {
     val downloadedPopularMovies: LiveData<MoviesResponse>
 
-    suspend fun fetchPopularMovies()
+    suspend fun fetchPopularMovies(page: Int)
 }

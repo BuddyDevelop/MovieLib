@@ -52,4 +52,5 @@
     
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="no_data_search">No results found.</string>
 </resources>

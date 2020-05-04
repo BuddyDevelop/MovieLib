@@ -14,10 +14,10 @@ class PopularMoviesNetworkDataSourceImpl(
     override val downloadedPopularMovies: LiveData<MoviesResponse>
         get() = _downloadedPopularMovies
 
-    override suspend fun fetchPopularMovies() {
+    override suspend fun fetchPopularMovies(page: Int) {
         try {
             val fetchMovies = tmdbApiService
-                .getPopularMovies()
+                .getPopularMovies(page)
                 .await()
 
             _downloadedPopularMovies.postValue(fetchMovies)

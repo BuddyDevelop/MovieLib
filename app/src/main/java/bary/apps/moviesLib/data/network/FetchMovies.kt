@@ -4,6 +4,7 @@ interface FetchMovies {
     suspend fun fetchMovies(
         voteCount: String,
         sortBy: String,
-        languageCode: String
+        languageCode: String,
+        page: Int
     )
 }

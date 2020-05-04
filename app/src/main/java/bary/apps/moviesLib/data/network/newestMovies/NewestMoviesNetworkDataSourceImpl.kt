@@ -14,10 +14,10 @@ class NewestMoviesNetworkDataSourceImpl(
     override val downloadedNewestMovies: LiveData<MoviesResponse>
         get() = _downloadedNewestMovies
 
-    override suspend fun fetchMovies(voteCount: String, sortBy: String, languageCode: String) {
+    override suspend fun fetchMovies(voteCount: String, sortBy: String, languageCode: String, page: Int) {
         try {
             val fetchMovies = tmdbApiService
-                .getMoviesByVoteCountAndSortByRelaseDate(voteCount, sortBy, languageCode)
+                .getMoviesByVoteCountAndSortByRelaseDate(voteCount, sortBy, languageCode, page)
                 .await()
             _downloadedNewestMovies.postValue(fetchMovies)
         }

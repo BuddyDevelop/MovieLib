@@ -14,10 +14,10 @@ class TopRatedMoviesNetworkDataSourceImpl(
     override val downloadedTopRatedMovies: LiveData<MoviesResponse>
         get() = _downloadedTopRatedMovies
 
-    override suspend fun fetchTopRatedMovies() {
+    override suspend fun fetchTopRatedMovies(page: Int) {
         try {
             val fetchedMovies = tmdbApiService
-                .getTopRatedMovies()
+                .getTopRatedMovies(page)
                 .await()
 
             _downloadedTopRatedMovies.postValue(fetchedMovies)

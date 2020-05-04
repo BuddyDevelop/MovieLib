@@ -2,6 +2,7 @@ package bary.apps.moviesLib.ui.movies.searchMovies
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -34,7 +35,7 @@ class SearchActivity : ScopedActivity(),
     override lateinit var viewModel: BaseMoviesViewModel
     private val mOnSearchConfirmedListener = OnSearchConfirmedListener { searchView, query ->
         searchView.collapse()
-        viewModel.searchMovies(query)
+        bindUI(query)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,13 +43,19 @@ class SearchActivity : ScopedActivity(),
         binding = DataBindingUtil.setContentView(this, R.layout.activity_search)
         viewModel = ViewModelProvider(this, viewModelFactory).get(BaseMoviesViewModel::class.java)
 
-        bindUI()
         initSearchView()
     }
 
-    private fun bindUI() = launch {
-        viewModel.searchedMovies.observe(this@SearchActivity, Observer {
-            if(it == null) return@Observer
+    private fun bindUI(movieName: String) = launch {
+        val searchedMovies = viewModel.observeSearchMovies(movieName).value.await()
+        searchedMovies.observe(this@SearchActivity, Observer {
+            if(it == null)
+                return@Observer
+
+            if(it.movies.isEmpty()) //if no result returned show text
+                binding.noDataSearch.visibility = View.VISIBLE
+            else
+                binding.noDataSearch.visibility = View.GONE
 
             binding.movies = it
             initRecyclerView(toMoviesEntries(it.movies))
