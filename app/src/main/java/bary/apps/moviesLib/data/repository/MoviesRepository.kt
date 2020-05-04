@@ -10,11 +10,12 @@ import bary.apps.moviesLib.data.network.response.Videos
 interface MoviesRepository {
     suspend fun getMovie(movieId: String): LiveData<MovieDetails>
     suspend fun getMovies(voteCount: String, sortBy: String, languageCode: String, page: Int): LiveData<MoviesResponse>
+    suspend fun getSimilarMovies(movieId: String) : LiveData<MoviesResponse>
     suspend fun getMostPopularMovies(page: Int) : LiveData<MoviesResponse>
     suspend fun getTopRatedMovies(page: Int) : LiveData<MoviesResponse>
     suspend fun getMovieTrailers(movieId: String): LiveData<Videos>
     suspend fun getSearchedMovies(movieName: String) : LiveData<MoviesResponse>
-    suspend fun getMovieReviews(movieId: Int) : LiveData<Reviews>
+    suspend fun getMovieReviews(movieId: String) : LiveData<Reviews>
     fun updateMovie(movie: Movie)
     fun deleteMovie(id: Int)
     fun favMovieInsertOrUpdate(id: Int, movie: Movie)

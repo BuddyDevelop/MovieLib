@@ -14,6 +14,10 @@ class NewestMoviesNetworkDataSourceImpl(
     override val downloadedNewestMovies: LiveData<MoviesResponse>
         get() = _downloadedNewestMovies
 
+    private val _downloadedSimilarMovies = MutableLiveData<MoviesResponse>()
+    override val downloadedSimilarMovies: LiveData<MoviesResponse>
+        get() = _downloadedSimilarMovies
+
     override suspend fun fetchMovies(voteCount: String, sortBy: String, languageCode: String, page: Int) {
         try {
             val fetchMovies = tmdbApiService
@@ -23,6 +27,19 @@ class NewestMoviesNetworkDataSourceImpl(
         }
         catch (e: NoConnectivityException){
             Log.e("NewestMovies", "No internet connection.", e)
+        }
+    }
+
+    override suspend fun fetchSimilarMovies(movieId: String) {
+        try {
+            val fetchMovies = tmdbApiService
+                .getSimilarMovies(movieId)
+                .await()
+
+            _downloadedSimilarMovies.postValue(fetchMovies)
+        }
+        catch (e: NoConnectivityException){
+            Log.e("SimilarMovies", "No internet connection.", e)
         }
     }
 }

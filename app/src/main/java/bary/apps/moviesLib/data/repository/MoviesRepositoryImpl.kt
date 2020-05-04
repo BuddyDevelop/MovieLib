@@ -176,17 +176,29 @@ class MoviesRepositoryImpl(
     //end search movies
 
     //get movie reviews
-    override suspend fun getMovieReviews(movieId: Int): LiveData<Reviews> {
+    override suspend fun getMovieReviews(movieId: String): LiveData<Reviews> {
         return withContext(Dispatchers.IO){
             fetchMovieReviews(movieId)
             return@withContext(movieReviewsNetworkDataSource.downloadedReviews)
         }
     }
 
-    private suspend fun fetchMovieReviews(movieId: Int){
+    private suspend fun fetchMovieReviews(movieId: String){
         movieReviewsNetworkDataSource.getReviewByMovieId(movieId)
     }
     //end movie reviews
+
+    override suspend fun getSimilarMovies(movieId: String): LiveData<MoviesResponse> {
+        return withContext(Dispatchers.IO){
+            fetchSimilarMovies(movieId)
+            return@withContext(newestMoviesNetworkDataSource.downloadedSimilarMovies)
+        }
+    }
+
+    private suspend fun fetchSimilarMovies(movieId: String){
+        newestMoviesNetworkDataSource.fetchSimilarMovies(movieId)
+    }
+    //end similar movies
 
     override suspend fun getFavouriteMovies(): LiveData<List<Movie>> {
         return withContext(Dispatchers.IO){

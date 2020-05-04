@@ -253,18 +253,68 @@
                     app:layout_constraintTop_toBottomOf="@id/add_to_watchlist" />
 
             <TextView
-                    android:id="@+id/movie_reviews"
+                    android:id="@+id/similar_movies"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:fontFamily="sans-serif-smallcaps"
+                    android:text="@string/similar_movies"
+                    android:textAlignment="textStart"
+                    android:textSize="@dimen/text_large_size"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/barrier"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/add_to_watchlist" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/similar_movies_recyclerview"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    app:layout_constraintTop_toBottomOf="@id/similar_movies"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/no_similar_movies"
+                    android:gravity="center"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="@string/no_similar_movies"
+                    android:visibility="invisible"
+                    tools:visibility="visible"
+                    app:layout_constraintTop_toBottomOf="@id/similar_movies_recyclerview"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textAppearance="@android:style/TextAppearance.Material.Headline" />
+
+            <TextView
+                    android:id="@+id/movie_reviews"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="16dp"
                     android:text="@string/reviews"
                     android:textAlignment="textStart"
                     android:textSize="@dimen/text_large_size"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/barrier"
-                    app:layout_constraintTop_toBottomOf="@id/add_to_watchlist" />
+                    app:layout_constraintTop_toBottomOf="@id/no_similar_movies" />
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@color/colorSilver"
+                    app:layout_constraintTop_toBottomOf="@id/no_similar_movies" />
 
             <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
@@ -284,6 +334,7 @@
                     android:id="@+id/no_reviews"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
+                    android:paddingBottom="20dp"
                     android:text="@string/no_reviews"
                     android:visibility="invisible"
                     tools:visibility="visible"
@@ -291,8 +342,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:textAppearance="@android:style/TextAppearance.Material.Headline" />
-
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

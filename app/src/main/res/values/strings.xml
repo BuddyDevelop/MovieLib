@@ -55,4 +55,6 @@
     <string name="no_data_search">No results found.</string>
     <string name="reviews">Reviews</string>
     <string name="no_reviews">No reviews found.</string>
+    <string name="similar_movies">Similar movies</string>
+    <string name="no_similar_movies">No similar movies found.</string>
 </resources>

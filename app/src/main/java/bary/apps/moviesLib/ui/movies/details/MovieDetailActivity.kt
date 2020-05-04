@@ -1,5 +1,6 @@
 package bary.apps.moviesLib.ui.movies.details
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
@@ -13,6 +14,8 @@ import bary.apps.moviesLib.data.network.response.Video
 import bary.apps.moviesLib.databinding.ActivityMovieDetailBinding
 import bary.apps.moviesLib.internal.MovieNotFoundException
 import bary.apps.moviesLib.ui.base.ScopedActivity
+import bary.apps.moviesLib.ui.movies.MovieItem
+import bary.apps.moviesLib.util.MovieToMovieItemConverter
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.shashank.sony.fancytoastlib.FancyToast
@@ -25,11 +28,11 @@ import org.kodein.di.android.closestKodein
 import org.kodein.di.generic.factory
 
 
-class MovieDetailActivity : ScopedActivity(), KodeinAware {
+class MovieDetailActivity : ScopedActivity(), MovieToMovieItemConverter, KodeinAware {
     override val kodein by closestKodein()
     private val viewModelFactoryInstanceFactory: ((String) -> MovieDetailViewModelFactory) by factory()
 
-    private lateinit var viewModel: MovieDetailViewModel
+    override lateinit var viewModel: MovieDetailViewModel
     private lateinit var binding: ActivityMovieDetailBinding
 
     override fun onCreate( savedInstanceState: Bundle?) {
@@ -51,6 +54,7 @@ class MovieDetailActivity : ScopedActivity(), KodeinAware {
         initToolbar()
         loadTrailer()
         loadReviews()
+        loadSimilarMovies()
     }
 
     private fun loadTrailer() = launch {
@@ -122,4 +126,43 @@ class MovieDetailActivity : ScopedActivity(), KodeinAware {
         toolbar.setNavigationOnClickListener { view -> onBackPressed() }
     }
 
+    private fun loadSimilarMovies() = launch {
+        val similarMovies = viewModel.similarMovies.await()
+        similarMovies.observe(this@MovieDetailActivity, Observer {
+            if(it == null)
+                return@Observer
+
+            if(it.movies.isEmpty())
+                no_similar_movies.visibility = View.VISIBLE
+            else
+                no_similar_movies.visibility = View.GONE
+
+            initSimilarMoviesRecyclerView(toMoviesEntries(it.movies))
+        })
+    }
+
+    private fun initSimilarMoviesRecyclerView(items: List<MovieItem>){
+        val groupAdapter = GroupAdapter<ViewHolder>().apply {
+            addAll(items)
+        }
+
+        similar_movies_recyclerview.apply {
+            layoutManager = LinearLayoutManager(this@MovieDetailActivity, LinearLayoutManager.HORIZONTAL, false)
+            adapter = groupAdapter
+        }
+
+        groupAdapter.setOnItemClickListener { item, _ ->
+            //to be sure click was on movie item
+            (item as? MovieItem)?.let {
+                showMovieDetails(it.movieItem.id.toString(), it.movieItem)
+            }
+        }
+    }
+
+    private fun showMovieDetails(movieId: String, movie: Movie) {
+        val intent = Intent(this, MovieDetailActivity::class.java)
+        intent.putExtra("MovieId", movieId)
+        intent.putExtra("Movie", movie)
+        startActivity(intent)
+    }
 }

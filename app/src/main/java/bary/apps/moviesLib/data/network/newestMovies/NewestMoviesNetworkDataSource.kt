@@ -6,4 +6,7 @@ import bary.apps.moviesLib.data.network.response.MoviesResponse
 
 interface NewestMoviesNetworkDataSource : FetchMovies {
     val downloadedNewestMovies: LiveData<MoviesResponse>
+    val downloadedSimilarMovies: LiveData<MoviesResponse>
+
+    suspend fun fetchSimilarMovies(movieId: String)
 }

@@ -6,5 +6,5 @@ import bary.apps.moviesLib.data.network.response.Reviews
 interface MovieReviewsNetworkDataSource {
     val downloadedReviews: LiveData<Reviews>
 
-    suspend fun getReviewByMovieId(id: Int)
+    suspend fun getReviewByMovieId(id: String)
 }

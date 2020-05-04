@@ -53,8 +53,13 @@ interface TmdbApiService {
 
     @GET("/3/movie/{movieId}/reviews")
     fun getReviews(
-        @Path("movieId") movieId: Int
+        @Path("movieId") movieId: String
     ) : Deferred<Reviews>
+
+    @GET("/3/movie/{movieId}/similar")
+    fun getSimilarMovies(
+        @Path("movieId") movieId: String
+    ) : Deferred<MoviesResponse>
 
     companion object{
         operator fun invoke(

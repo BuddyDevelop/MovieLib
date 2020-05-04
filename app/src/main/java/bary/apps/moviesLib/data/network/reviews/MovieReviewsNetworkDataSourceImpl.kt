@@ -14,7 +14,7 @@ class MovieReviewsNetworkDataSourceImpl(
     override val downloadedReviews: LiveData<Reviews>
         get() = _downloadedReviews
 
-    override suspend fun getReviewByMovieId(id: Int) {
+    override suspend fun getReviewByMovieId(id: String) {
         try {
             val reviews = tmdbApiService
                 .getReviews(id)
