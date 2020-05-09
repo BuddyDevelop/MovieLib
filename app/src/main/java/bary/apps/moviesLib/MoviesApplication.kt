@@ -21,7 +21,7 @@ import bary.apps.moviesLib.data.repository.MoviesRepository
 import bary.apps.moviesLib.data.repository.MoviesRepositoryImpl
 import bary.apps.moviesLib.ui.MainViewModelFactory
 import bary.apps.moviesLib.ui.movies.details.MovieDetailViewModelFactory
-import bary.apps.moviesLib.ui.movies.BaseMoviesViewModelFactory
+import bary.apps.moviesLib.ui.base.BaseMoviesViewModelFactory
 import bary.apps.moviesLib.ui.movies.newest.NewestMoviesViewModelFactory
 import bary.apps.moviesLib.ui.movies.popular.PopularMoviesViewModelFactory
 import bary.apps.moviesLib.ui.movies.topRated.TopRatedMoviesViewModelFactory
@@ -41,7 +41,11 @@ class MoviesApplication : Application(), KodeinAware {
         bind() from singleton { TmdbApiService(instance()) }
         bind<MoviesRepository>() with  singleton { MoviesRepositoryImpl(instance(), instance(), instance(), instance(), instance(), instance(), instance(), instance()) }
         bind() from factory { movieId: String -> MovieDetailViewModelFactory(instance(), movieId) }
-        bind() from provider { BaseMoviesViewModelFactory(instance()) }
+        bind() from provider {
+            BaseMoviesViewModelFactory(
+                instance()
+            )
+        }
         bind() from provider { MainViewModelFactory(instance()) }
         bind() from provider { TopRatedMoviesViewModelFactory(instance()) }
         bind() from provider { NewestMoviesViewModelFactory(instance()) }

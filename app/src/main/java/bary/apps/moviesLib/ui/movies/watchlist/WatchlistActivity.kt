@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import bary.apps.moviesLib.R
 import bary.apps.moviesLib.data.database.entity.Movie
 import bary.apps.moviesLib.databinding.ActivityFavouritesBinding
+import bary.apps.moviesLib.ui.base.BaseMoviesViewModel
+import bary.apps.moviesLib.ui.base.BaseMoviesViewModelFactory
 import bary.apps.moviesLib.ui.base.ScopedActivity
 import bary.apps.moviesLib.ui.movies.*
 import bary.apps.moviesLib.ui.movies.details.MovieDetailActivity

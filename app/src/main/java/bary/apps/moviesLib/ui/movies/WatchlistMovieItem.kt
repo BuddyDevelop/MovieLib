@@ -3,6 +3,7 @@ package bary.apps.moviesLib.ui.movies
 import bary.apps.moviesLib.R
 import bary.apps.moviesLib.data.database.entity.Movie
 import bary.apps.moviesLib.databinding.ItemMovieBindingImpl
+import bary.apps.moviesLib.ui.base.BaseMoviesViewModel
 import bary.apps.moviesLib.util.REMOVE_ACTION_TAG
 import kotlinx.android.synthetic.main.item_movie.view.*
 

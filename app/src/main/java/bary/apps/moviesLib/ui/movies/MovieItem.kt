@@ -3,6 +3,7 @@ package bary.apps.moviesLib.ui.movies
 import bary.apps.moviesLib.R
 import bary.apps.moviesLib.data.database.entity.Movie
 import bary.apps.moviesLib.databinding.ItemMovieBindingImpl
+import bary.apps.moviesLib.ui.base.BaseMoviesViewModel
 import com.xwray.groupie.databinding.BindableItem
 
 open class MovieItem(

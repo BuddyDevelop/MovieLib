@@ -11,13 +11,12 @@ import bary.apps.moviesLib.R
 import bary.apps.moviesLib.data.database.entity.Movie
 import bary.apps.moviesLib.databinding.ActivitySearchBinding
 import bary.apps.moviesLib.ui.base.ScopedActivity
-import bary.apps.moviesLib.ui.movies.BaseMoviesViewModel
-import bary.apps.moviesLib.ui.movies.BaseMoviesViewModelFactory
+import bary.apps.moviesLib.ui.base.BaseMoviesViewModel
+import bary.apps.moviesLib.ui.base.BaseMoviesViewModelFactory
 import bary.apps.moviesLib.ui.movies.MovieItem
 import bary.apps.moviesLib.util.MovieToMovieItemConverter
 import bary.apps.moviesLib.ui.movies.details.MovieDetailActivity
 import com.paulrybitskyi.persistentsearchview.listeners.OnSearchConfirmedListener
-import com.paulrybitskyi.persistentsearchview.utils.VoiceRecognitionDelegate
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_search.*
@@ -64,12 +63,11 @@ class SearchActivity : ScopedActivity(),
 
     private fun initSearchView() {
         with(persistentSearchView) {
-            setVoiceRecognitionDelegate(VoiceRecognitionDelegate(this@SearchActivity))
             setOnSearchConfirmedListener(mOnSearchConfirmedListener)
             setDismissOnTouchOutside(true)
             setDimBackground(true)
             isProgressBarEnabled = true
-            isVoiceInputButtonEnabled = true
+            isVoiceInputButtonEnabled = false
             isClearInputButtonEnabled = true
             setSuggestionsDisabled(true)
             requestFocus()

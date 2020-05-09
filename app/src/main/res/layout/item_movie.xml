@@ -9,14 +9,13 @@
                 type="bary.apps.moviesLib.data.database.entity.Movie" />
         <variable
                 name="viewModel"
-                type="bary.apps.moviesLib.ui.movies.BaseMoviesViewModel" />
+                type="bary.apps.moviesLib.ui.base.BaseMoviesViewModel" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_margin="8dp"
             app:cardCornerRadius="4dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout

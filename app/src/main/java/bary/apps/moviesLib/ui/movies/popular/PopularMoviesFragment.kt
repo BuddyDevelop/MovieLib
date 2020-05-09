@@ -19,6 +19,7 @@ import bary.apps.moviesLib.ui.movies.MovieItem
 import bary.apps.moviesLib.util.MovieToMovieItemConverter
 import bary.apps.moviesLib.ui.movies.newest.LAST_VISIBLE_PAGE_ITEMS
 import bary.apps.moviesLib.ui.movies.newest.PAGE_ITEMS_COUNT
+import bary.apps.moviesLib.util.MsgUtil
 import bary.apps.moviesLib.util.RecyclerViewScrollListener
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
@@ -27,6 +28,7 @@ import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+import retrofit2.HttpException
 
 
 class PopularMoviesFragment : ScopedFragment(),
@@ -66,24 +68,28 @@ class PopularMoviesFragment : ScopedFragment(),
     }
 
     private fun bindUI() = launch {
-        val popularMovies = viewModel.fetchPageOfPopularMovies(1).value.await()
-        popularMovies.observe(viewLifecycleOwner, Observer {
-            if(it == null ) return@Observer
+        try {
+            val popularMovies = viewModel.fetchPageOfPopularMovies(1).value.await()
+            popularMovies.observe(viewLifecycleOwner, Observer {
+                if (it == null) return@Observer
 
-            //deactivate loading view
-            group_loading.stopShimmerAnimation()
-            group_loading.visibility = View.GONE
-            //init recycler view
-            initRecyclerView(toMoviesEntries(it.movies))
-            //set scroll listener when there is more pages to show
-            if(it.page < it.totalPages){
-                val nextPage = it.page.inc()
+                //deactivate loading view
+                group_loading.stopShimmerAnimation()
+                group_loading.visibility = View.GONE
+                //init recycler view
+                initRecyclerView(toMoviesEntries(it.movies))
+                //set scroll listener when there is more pages to show
+                if (it.page < it.totalPages) {
+                    val nextPage = it.page.inc()
 
-                setRecyclerViewScrollListener(nextPage){
-                    viewModel.getNextPageOfPopularMovies(nextPage)
+                    setRecyclerViewScrollListener(nextPage) {
+                        viewModel.getNextPageOfPopularMovies(nextPage)
+                    }
                 }
-            }
-        })
+            })
+        } catch (e: HttpException){
+            this@PopularMoviesFragment.context?.let { MsgUtil.showErrorToast(it, getString(R.string.server_err)) }
+        }
     }
 
     private fun initRecyclerView(items: List<MovieItem>){

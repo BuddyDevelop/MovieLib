@@ -16,9 +16,9 @@ import bary.apps.moviesLib.internal.MovieNotFoundException
 import bary.apps.moviesLib.ui.base.ScopedActivity
 import bary.apps.moviesLib.ui.movies.MovieItem
 import bary.apps.moviesLib.util.MovieToMovieItemConverter
+import bary.apps.moviesLib.util.MsgUtil.showErrorToast
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
-import com.shashank.sony.fancytoastlib.FancyToast
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_movie_detail.*
@@ -26,6 +26,7 @@ import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
 import org.kodein.di.generic.factory
+import retrofit2.HttpException
 
 
 class MovieDetailActivity : ScopedActivity(), MovieToMovieItemConverter, KodeinAware {
@@ -58,25 +59,23 @@ class MovieDetailActivity : ScopedActivity(), MovieToMovieItemConverter, KodeinA
     }
 
     private fun loadTrailer() = launch {
-        val movieVideos = viewModel.movieVideos.await()
-        movieVideos.observe(this@MovieDetailActivity, Observer {
-            if(it == null) return@Observer
+        try {
+            val movieVideos = viewModel.movieVideos.await()
+            movieVideos.observe(this@MovieDetailActivity, Observer {
+                if (it == null) return@Observer
 
-            //cuz library does not provide data binding setters so adapter is not possible to append
-            //if movie has any video at all
-            if(it.videos.isNotEmpty()) {
-                val trailerTypeMovie = it.videos.first { video -> video.type == "Trailer" }
-                initYouTubePlayer(trailerTypeMovie)
-            } else {
-                FancyToast.makeText(
-                    this@MovieDetailActivity,
-                    getString(R.string.no_trailer_available),
-                    FancyToast.LENGTH_LONG,
-                    FancyToast.ERROR,
-                    false
-                ).show()
-            }
-        })
+                //cuz library does not provide data binding setters so adapter is not possible to append
+                //if movie has any video at all
+                try {
+                    val trailerTypeMovie = it.videos.first { video -> video.type == "Trailer" }
+                    initYouTubePlayer(trailerTypeMovie)
+                } catch (e: NoSuchElementException){
+                    showErrorToast(this@MovieDetailActivity, getString(R.string.no_trailer_available))
+                }
+            })
+        } catch (e: HttpException){
+            showErrorToast(this@MovieDetailActivity, getString(R.string.server_err))
+        }
     }
 
     private fun initYouTubePlayer(trailerTypeMovie: Video) {
@@ -89,18 +88,22 @@ class MovieDetailActivity : ScopedActivity(), MovieToMovieItemConverter, KodeinA
     }
 
     private fun loadReviews() = launch {
-        val movieReviews = viewModel.movieReviews.await()
-        movieReviews.observe(this@MovieDetailActivity, Observer {
-            if(it == null)
-                return@Observer
+        try {
+            val movieReviews = viewModel.movieReviews.await()
+            movieReviews.observe(this@MovieDetailActivity, Observer {
+                if (it == null)
+                    return@Observer
 
-            if(it.reviews.isEmpty()) //if no reviews show text
-                binding.noReviews.visibility = View.VISIBLE
-            else
-                binding.noReviews.visibility = View.GONE
+                if (it.reviews.isEmpty()) //if no reviews show text
+                    binding.noReviews.visibility = View.VISIBLE
+                else
+                    binding.noReviews.visibility = View.GONE
 
-            initReviewsRecyclerView(toReviewEntries(it.reviews))
-        })
+                initReviewsRecyclerView(toReviewEntries(it.reviews))
+            })
+        } catch (e: HttpException){
+            showErrorToast(this@MovieDetailActivity, getString(R.string.server_err))
+        }
     }
 
     private fun toReviewEntries(reviews: List<Review>) : List<ReviewItem>{
@@ -115,7 +118,7 @@ class MovieDetailActivity : ScopedActivity(), MovieToMovieItemConverter, KodeinA
         }
 
         reviews_recyclerview.apply {
-            layoutManager = LinearLayoutManager(this@MovieDetailActivity)
+            layoutManager = LinearLayoutManager(this@MovieDetailActivity, LinearLayoutManager.HORIZONTAL, false)
             adapter = groupAdapter
         }
     }
@@ -127,18 +130,22 @@ class MovieDetailActivity : ScopedActivity(), MovieToMovieItemConverter, KodeinA
     }
 
     private fun loadSimilarMovies() = launch {
-        val similarMovies = viewModel.similarMovies.await()
-        similarMovies.observe(this@MovieDetailActivity, Observer {
-            if(it == null)
-                return@Observer
+        try{
+            val similarMovies = viewModel.similarMovies.await()
+            similarMovies.observe(this@MovieDetailActivity, Observer {
+                if(it == null)
+                    return@Observer
 
-            if(it.movies.isEmpty())
-                no_similar_movies.visibility = View.VISIBLE
-            else
-                no_similar_movies.visibility = View.GONE
+                if(it.movies.isEmpty())
+                    no_similar_movies.visibility = View.VISIBLE
+                else
+                    no_similar_movies.visibility = View.GONE
 
-            initSimilarMoviesRecyclerView(toMoviesEntries(it.movies))
-        })
+                initSimilarMoviesRecyclerView(toMoviesEntries(it.movies))
+            })
+        } catch (e: HttpException){
+            showErrorToast(this@MovieDetailActivity, getString(R.string.server_err))
+        }
     }
 
     private fun initSimilarMoviesRecyclerView(items: List<MovieItem>){

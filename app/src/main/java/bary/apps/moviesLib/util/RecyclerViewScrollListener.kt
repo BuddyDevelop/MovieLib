@@ -1,10 +1,12 @@
 package bary.apps.moviesLib.util
 
+import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import bary.apps.moviesLib.ui.movies.BaseMoviesViewModel
+import bary.apps.moviesLib.ui.base.BaseMoviesViewModel
+import retrofit2.HttpException
 
 interface RecyclerViewScrollListener {
     var mRecyclerScrollListener: RecyclerView.OnScrollListener
@@ -24,7 +26,11 @@ interface RecyclerViewScrollListener {
                 if(totalItemsCount == lastVisibleItemPosition + 1) {
                     mBottomProgressBar.visibility = View.VISIBLE   //show progress bar
 
-                    funToFetchData.invoke(page) //invoke method to get next page of data
+                    try {
+                        funToFetchData.invoke(page) //invoke method to get next page of data
+                    } catch (e: HttpException){
+                        Log.e("ScrollListener", e.message())
+                    }
 
                     //remove scroll listener to avoid loading multiple data
                     mRecyclerView.removeOnScrollListener(mRecyclerScrollListener)

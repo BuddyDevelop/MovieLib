@@ -1,7 +1,7 @@
 package bary.apps.moviesLib.util
 
 import bary.apps.moviesLib.data.database.entity.Movie
-import bary.apps.moviesLib.ui.movies.BaseMoviesViewModel
+import bary.apps.moviesLib.ui.base.BaseMoviesViewModel
 import bary.apps.moviesLib.ui.movies.MovieItem
 
 interface MovieToMovieItemConverter {

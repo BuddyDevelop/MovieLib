@@ -3,10 +3,10 @@ package bary.apps.moviesLib.ui.movies.newest
 import androidx.lifecycle.viewModelScope
 import bary.apps.moviesLib.data.repository.MoviesRepository
 import bary.apps.moviesLib.internal.lazyDeferred
-import bary.apps.moviesLib.ui.movies.BaseMoviesViewModel
-import bary.apps.moviesLib.ui.movies.LANGUAGE_CODE_EN
-import bary.apps.moviesLib.ui.movies.SORT_BY_RELEASE_DATE_DESC
-import bary.apps.moviesLib.ui.movies.VOTE_COUNT_20
+import bary.apps.moviesLib.ui.base.BaseMoviesViewModel
+import bary.apps.moviesLib.ui.base.LANGUAGE_CODE_EN
+import bary.apps.moviesLib.ui.base.SORT_BY_RELEASE_DATE_DESC
+import bary.apps.moviesLib.ui.base.VOTE_COUNT_20
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

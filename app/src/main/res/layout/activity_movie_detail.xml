@@ -39,7 +39,6 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/toolbar"
                         app:title="@string/details_movie"
-                        app:layout_scrollFlags="scroll|enterAlways|snap"
                         app:theme="@style/ThemeOverlay.AppCompat.Dark"
                         app:contentInsetStartWithNavigation="56dp"/>
 
@@ -269,6 +268,9 @@
             <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:clipToPadding="false"
                     android:id="@+id/similar_movies_recyclerview"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior"
                     app:layout_constraintTop_toBottomOf="@id/similar_movies"

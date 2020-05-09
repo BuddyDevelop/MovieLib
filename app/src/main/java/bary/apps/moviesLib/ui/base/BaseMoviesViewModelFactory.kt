@@ -1,4 +1,4 @@
-package bary.apps.moviesLib.ui.movies
+package bary.apps.moviesLib.ui.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

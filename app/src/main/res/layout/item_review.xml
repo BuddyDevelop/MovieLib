@@ -39,27 +39,43 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
                 android:layout_marginStart="50dp"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:text="@{review.author}"
                 android:textSize="@dimen/input_text_size"
                 android:id="@+id/author_review"
                 android:fontFamily="sans-serif-smallcaps"
-                android:textAppearance="@android:style/TextAppearance.Material.Headline"
                 app:layout_constraintStart_toEndOf="@id/profile_image_review"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:maxLines="6"
-                    android:ellipsize="end"
-                    android:id="@+id/review_content"
-                    android:text="@{review.content}"
-                    android:textSize="@dimen/input_text_size"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/profile_image_review"/>
+        <com.ms.square.android.expandabletextview.ExpandableTextView
+                xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/review_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@{review.content}"
+                expandableTextView:maxCollapsedLines="4"
+                expandableTextView:animDuration="200"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profile_image_review">
+
+                    <TextView
+                            android:id="@id/expandable_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp" />
+
+                    <ImageButton
+                            android:id="@id/expand_collapse"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp"
+                            android:layout_gravity="end|bottom"
+                            android:background="@android:color/transparent"/>
+        </com.ms.square.android.expandabletextview.ExpandableTextView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

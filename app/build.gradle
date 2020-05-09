@@ -122,4 +122,7 @@ dependencies {
 
 //floating navigation view
     implementation 'com.github.andremion:floatingnavigationview:1.2.0'
+
+//expandable text view
+    implementation 'com.ms-square:expandableTextView:0.1.4'
 }
